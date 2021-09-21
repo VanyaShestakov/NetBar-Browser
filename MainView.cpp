@@ -10,6 +10,7 @@
 #include "PageInfoUnit.h"
 #include "BookmarksReader.h"
 #include "BookmarksWriter.h"
+#include "StringConverter.h"
 
 //---------------------------------------------------------------------------
 
@@ -33,67 +34,16 @@ void __fastcall TWebView::FormCreate(TObject *Sender)
 	createNewTab();
 	BookmarksReader *reader = new BookmarksReader();
 	bookmarks = reader->readBookmarks("test.txt");
+	StringConverter *converter = new StringConverter();
 	for (int i = 0; i < bookmarks.size(); i++)
 	{
-		bookmarksBox->Items->Add(bookmarks[i].first.c_str());
+		bookmarksBox
+			->Items
+			->Add(converter->convertToSystemString(bookmarks[i].first));
 	}
-	//activityIndicator->StartAnimation();
+	delete reader;
+	delete converter;
 }
-
-
-	 /*
-
-void __fastcall TWebView::TabControlDrawTab(TCustomTabControl *Control, int TabIndex,
-		  const TRect &Rect, bool Active)
-{
-	const int size = 15;
-	TCanvas *canv = Control->Canvas;
-    canv->FillRect(Rect);
-
-	canv->Brush->Color = clBtnFace;
-	String AText = ((TTabControl*)Control)->Tabs->Strings[TabIndex];
-    TPoint APoint;
-    APoint.x = (Rect.Right - Rect.Left) / 2 - canv->TextWidth(AText) / 2;
-	APoint.y = (Rect.Bottom - Rect.Top) / 2 - canv->TextHeight(AText) / 2;
-    canv->TextRect(Rect, Rect.Left + APoint.x, Rect.Top + APoint.y, AText);
-
-    // ћожешь рисовать что-то более навороченное
-    canv->Brush->Color = clRed;
-    TRect r = Classes::Rect(Rect.Right - size - 4, Rect.Top + 2, Rect.Right - 2, Rect.Top + size + 4);
-    canv->Pen->Color = clWhite;
-    canv->Rectangle(r);
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TWebView::TabControlMouseDown(TObject *Sender, TMouseButton Button,
-		  TShiftState Shift, int X, int Y)
-{
-	const int size = 15;
-    TTabControl *tc = dynamic_cast<TTabControl*>(Sender);
-    if(Button == mbLeft)
-    {
-		TPoint mousePos;
-		GetCursorPos(&mousePos);
-        TTCHitTestInfo hti;
-        hti.pt = tc->ScreenToClient(mousePos);
-
-        int ret = SendMessage(tc->Handle, TCM_HITTEST, 0, (LPARAM)&hti);
-        if(hti.flags & TCHT_ONITEM)
-        {
-            if(tc->TabIndex == ret)
-            {
-                TRect r = tc->TabRect(tc->TabIndex);
-				if(PtInRect(Rect(r.Right - size - 4, r.Top + 2, r.Right - 2, r.Top + size + 4),
-							hti.pt)) // «десь делай с табом все, что захочешь...
-                {
-					ShowMessage("close tab #");
-                }
-            }
-        }
-    }
-}
-
-	 */
 
 //BUTTONS ANIMATION/////////////////////////////////////////////////////////////
 
@@ -110,13 +60,13 @@ void __fastcall TWebView::backBtnMouseUp(TObject *Sender, TMouseButton Button, T
 }
 
 void __fastcall TWebView::forwardBtnMouseDown(TObject *Sender, TMouseButton Button,
-          TShiftState Shift, int X, int Y)
+		  TShiftState Shift, int X, int Y)
 {
 	forwardBtn->Top = forwardBtn->Top + ANIMATION_OFFSET;
 }
 
 void __fastcall TWebView::forwardBtnMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift,
-          int X, int Y)
+		  int X, int Y)
 {
 	forwardBtn->Top = forwardBtn->Top - ANIMATION_OFFSET;
 }
@@ -264,17 +214,17 @@ void __fastcall TWebView::updateBtnClick(TObject *Sender)
 
 void __fastcall TWebView::searchBtnClick(TObject *Sender)
 {
-	AnsiString str = addressBar->Text;
-	std::string request = str.c_str();
+	StringConverter *converter = new StringConverter();
+	std::string request = converter->convertToStdString(addressBar->Text);
 	if (request.rfind(URL_PREFIX, 0) == 0)
 	{
-		getCurrentBrowser()->Navigate(str);
+		getCurrentBrowser()->Navigate(converter->convertToSystemString(request));
 	}
 	else
 	{
 		getCurrentBrowser()->Navigate(SEARCH_URL + addressBar->Text);
 	}
-
+	delete converter;
 }
 void __fastcall TWebView::homeBtnClick(TObject *Sender)
 {
@@ -307,11 +257,14 @@ void __fastcall TWebView::WebBrowserTitleChange(TObject *ASender, const WideStri
 void __fastcall TWebView::DocumentComplete(TObject *ASender, _di_IDispatch const pDisp, const OleVariant &URL)
 {
 	pageURL = URL;
-	PageControl->ActivePage->Caption = TAB_SPACE + title + TAB_SPACE;
+	PageControl
+		->ActivePage
+		->Caption = TAB_SPACE + title + TAB_SPACE;
 	isLoaded = true;
 	activityIndicator->StopAnimation();
 	activityIndicator->Visible = false;
-	if (bookmarkContains(convertToStdString(URL)))
+	StringConverter *converter = new StringConverter();
+	if (bookmarkContains(converter->convertToStdString(URL)))
 	{
 		deleteBookmarkBtn->Visible = true;
 		addBookmarkBtn->Visible = false;
@@ -321,6 +274,7 @@ void __fastcall TWebView::DocumentComplete(TObject *ASender, _di_IDispatch const
 		deleteBookmarkBtn->Visible = false;
 		addBookmarkBtn->Visible = true;
 	}
+	delete converter;
 }
 
 void __fastcall TWebView::NewWindow3(TObject *ASender, _di_IDispatch &ppDisp, WordBool &Cancel,
@@ -377,7 +331,8 @@ void __fastcall TWebView::PageControlChange(TObject *Sender)
 	title = getCurrentBrowser()->LocationName;
 	pageURL = getCurrentBrowser()->LocationURL;
 	addressBar->Text = title;
-	if (bookmarkContains(convertToStdString(pageURL)))
+	StringConverter *converter = new StringConverter();
+	if (bookmarkContains(converter->convertToStdString(pageURL)))
 	{
 		deleteBookmarkBtn->Visible = true;
 		addBookmarkBtn->Visible = false;
@@ -387,6 +342,7 @@ void __fastcall TWebView::PageControlChange(TObject *Sender)
 		deleteBookmarkBtn->Visible = false;
 		addBookmarkBtn->Visible = true;
 	}
+	delete converter;
 }
 
 void __fastcall TWebView::PageControlMouseUp(TObject *Sender, TMouseButton Button,
@@ -394,8 +350,8 @@ void __fastcall TWebView::PageControlMouseUp(TObject *Sender, TMouseButton Butto
 {
 	if (Button == mbRight && PageControl->PageCount > 1)
 	{
-		int i = PageControl->IndexOfTabAt(X,Y);
-		PageControl->Pages[i]->Free();
+		int index = PageControl->IndexOfTabAt(X,Y);
+		PageControl->Pages[index]->Free();
 	}
 }
 
@@ -403,7 +359,9 @@ void __fastcall TWebView::PageControlMouseUp(TObject *Sender, TMouseButton Butto
 
 TWebBrowser* TWebView::getCurrentBrowser()
 {
-	return (TWebBrowser*) PageControl->ActivePage->FindChildControl(PageControl->ActivePage->Name + "_browser");
+	return (TWebBrowser*) PageControl
+		->ActivePage
+		->FindChildControl(PageControl->ActivePage->Name + "_browser");
 }
 
 
@@ -426,11 +384,14 @@ void __fastcall TWebView::addBookmarkBtnClick(TObject *Sender)
 void TWebView::rewriteBookmarks()
 {
 	BookmarksWriter *writer = new BookmarksWriter();
+	StringConverter *converter = new StringConverter();
 	std::pair<std::string, std::string> pair;
-	pair.first = convertToStdString(title);
-	pair.second = convertToStdString(pageURL);
+	pair.first = converter->convertToStdString(title);
+	pair.second = converter->convertToStdString(pageURL);
 	bookmarks.push_back(pair);
 	writer->writeBookmarks(bookmarks, "test.txt");
+	delete writer;
+	delete converter;
 }
 
 bool TWebView::bookmarkContains(std::string url)
@@ -445,19 +406,17 @@ bool TWebView::bookmarkContains(std::string url)
 	return false;
 }
 
-std::string TWebView::convertToStdString(String str)
-{
-	AnsiString ansiStr = str;
-	return ansiStr.c_str();
-}
-
 void TWebView::updateBookmarksBox()
 {
+	StringConverter *converter = new StringConverer();
 	bookmarksBox->Clear();
 	for (int i = 0; i < bookmarks.size(); i++)
 	{
-		bookmarksBox->Items->Add(bookmarks[i].first.c_str());
+		bookmarksBox
+			->Items
+			->Add(converter->convertToSystemString(bookmarks[i].first));
 	}
+	delete converter;
 }
 
 void __fastcall TWebView::BeforeNavigate2(TObject *ASender, _di_IDispatch const pDisp,
@@ -472,16 +431,16 @@ void __fastcall TWebView::BeforeNavigate2(TObject *ASender, _di_IDispatch const 
 
 void __fastcall TWebView::bookmarksBoxSelect(TObject *Sender)
 {
-	getCurrentBrowser()->Navigate(bookmarks[bookmarksBox->ItemIndex].second.c_str());
+	StringConverter *converter = new StringConverter();
+	getCurrentBrowser()
+		->Navigate(converter->convertToSystemString(bookmarks[bookmarksBox->ItemIndex].second));
 }
-//---------------------------------------------------------------------------
 
 void __fastcall TWebView::deleteBookmarkBtnClick(TObject *Sender)
 {
 	addBookmarkBtn->Visible = true;
 	deleteBookmarkBtn->Visible = false;
 }
-//---------------------------------------------------------------------------
 
 
 
