@@ -11,6 +11,7 @@
 #include "BookmarksReader.h"
 #include "BookmarksWriter.h"
 #include "StringConverter.h"
+#include "SettingsView.h"
 
 //---------------------------------------------------------------------------
 
@@ -372,7 +373,8 @@ void __fastcall TWebView::showBookmarksBtnClick(TObject *Sender)
 
 void __fastcall TWebView::addBookmarkBtnClick(TObject *Sender)
 {
-	if (isLoaded && !bookmarkContains(convertToStdString(pageURL)))
+
+	if (isLoaded /* TODO  && !bookmarkContains(convertToStdString(pageURL))*/)
 	{
 		rewriteBookmarks();
 		updateBookmarksBox();
@@ -408,7 +410,7 @@ bool TWebView::bookmarkContains(std::string url)
 
 void TWebView::updateBookmarksBox()
 {
-	StringConverter *converter = new StringConverer();
+	StringConverter *converter = new StringConverter();
 	bookmarksBox->Clear();
 	for (int i = 0; i < bookmarks.size(); i++)
 	{
@@ -443,4 +445,10 @@ void __fastcall TWebView::deleteBookmarkBtnClick(TObject *Sender)
 }
 
 
+
+void __fastcall TWebView::settingsBtnClick(TObject *Sender)
+{
+    SettingsForm->Show();
+}
+//---------------------------------------------------------------------------
 

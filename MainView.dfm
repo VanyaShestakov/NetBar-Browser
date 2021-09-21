@@ -250,6 +250,7 @@ object WebView: TWebView
         4307C4167EDB882DAED10151C537B8B8C653E1A003522B20488543AC93C9AD42
         494AA6E43402A8920FF00100F204BF63E698146F0000000049454E44AE426082}
       Stretch = True
+      OnClick = settingsBtnClick
       OnMouseDown = settingsBtnMouseDown
       OnMouseUp = settingsBtnMouseUp
     end

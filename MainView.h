@@ -24,6 +24,8 @@
 #include <VCLTee.TeCanvas.hpp>
 #include <vector>
 #include <utility>
+
+
 #include "PageInfoUnit.h"
 //---------------------------------------------------------------------------
 class TWebView : public TForm
@@ -111,6 +113,7 @@ __published:	// IDE-managed Components
           int X, int Y);
 	void __fastcall bookmarksBoxSelect(TObject *Sender);
 	void __fastcall deleteBookmarkBtnClick(TObject *Sender);
+	void __fastcall settingsBtnClick(TObject *Sender);
 
    /*	void __fastcall TabControlDrawTab(TCustomTabControl *Control, int TabIndex,
 		  const TRect &Rect, bool Active);
@@ -131,7 +134,6 @@ public:		// User declarations
 		  const OleVariant &URL, const OleVariant &Flags, const OleVariant &TargetFrameName,
 		  const OleVariant &PostData, const OleVariant &Headers,
 		  WordBool &Cancel);
-	std::string convertToStdString(String str);
 	void updateBookmarksBox();
 	bool bookmarkContains(std::string url);
     void rewriteBookmarks();
