@@ -1,0 +1,3 @@
+google=privet
+sosiska=govno
+sobaka=loc
