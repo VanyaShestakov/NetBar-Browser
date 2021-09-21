@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------
+
+#ifndef StringConverterH
+#define StringConverterH
+//---------------------------------------------------------------------------
+class StringConverter
+{
+	private:
+	public:
+		std::string TWebView::convertToStdString(String str);
+
+
+};
+#endif
