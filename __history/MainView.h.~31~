@@ -20,8 +20,12 @@
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Graphics.hpp>
 #include <Vcl.Imaging.pngimage.hpp>
+#include <Vcl.Menus.hpp>
+#include <VCLTee.TeCanvas.hpp>
 #include <vector>
 #include <utility>
+
+
 #include "PageInfoUnit.h"
 //---------------------------------------------------------------------------
 class TWebView : public TForm
@@ -44,6 +48,11 @@ __published:	// IDE-managed Components
 	TPageControl *PageControl;
 	TImage *showBookmarksBtn;
 	TComboBox *bookmarksBox;
+	TPopupMenu *PopupMenu1;
+	TMenuItem *vcx1;
+	TMenuItem *sdv1;
+	TActivityIndicator *activityIndicator;
+	TImage *deleteBookmarkBtn;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall backBtnClick(TObject *Sender);
 	void __fastcall forwardBtnClick(TObject *Sender);
@@ -103,6 +112,13 @@ __published:	// IDE-managed Components
 	void __fastcall showBookmarksBtnMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift,
           int X, int Y);
 	void __fastcall bookmarksBoxSelect(TObject *Sender);
+	void __fastcall deleteBookmarkBtnClick(TObject *Sender);
+	void __fastcall settingsBtnClick(TObject *Sender);
+
+   /*	void __fastcall TabControlDrawTab(TCustomTabControl *Control, int TabIndex,
+		  const TRect &Rect, bool Active);
+	void __fastcall TabControlMouseDown(TObject *Sender, TMouseButton Button,
+		  TShiftState Shift, int X, int Y);      */
 
 private:	// User declarations
 public:		// User declarations
@@ -118,16 +134,26 @@ public:		// User declarations
 		  const OleVariant &URL, const OleVariant &Flags, const OleVariant &TargetFrameName,
 		  const OleVariant &PostData, const OleVariant &Headers,
 		  WordBool &Cancel);
-	std::string convertToStdString(String str);
-    void updateBookmarksBox();
+	void updateBookmarksBox();
+	bool bookmarkContains(std::string url);
+    void rewriteBookmarks();
 
-bool isFullScreen = false;
-bool isLoaded = true;
-String title = "";
-String pageURL = "";
-bool isSelectedBar = false;
-int tabId = 0;
-std::vector<std::pair<std::string, std::string>> bookmarks;
+	bool isFullScreen = false;
+	bool isLoaded = true;
+	String title = "";
+	String pageURL = "";
+	bool isSelectedBar = false;
+	int tabId = 0;
+	std::vector<std::pair<std::string, std::string>> bookmarks;
+
+	const int ANIMATION_OFFSET = 3;
+
+	const String NEW_TAB_CAPTION = "Новая вкладка";
+	const String HOMEPAGE_URL = "https://www.google.com/";
+	const String SEARCH_URL = "https://www.google.com/search?q=";
+    const String TAB_SPACE = "         ";
+	const std::string URL_PREFIX = "https://";
+
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TWebView *WebView;

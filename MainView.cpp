@@ -353,6 +353,21 @@ void __fastcall TWebView::PageControlMouseUp(TObject *Sender, TMouseButton Butto
 	{
 		int index = PageControl->IndexOfTabAt(X,Y);
 		PageControl->Pages[index]->Free();
+        title = getCurrentBrowser()->LocationName;
+		pageURL = getCurrentBrowser()->LocationURL;
+		addressBar->Text = title;
+		StringConverter *converter = new StringConverter();
+		if (bookmarkContains(converter->convertToStdString(pageURL)))
+		{
+			deleteBookmarkBtn->Visible = true;
+			addBookmarkBtn->Visible = false;
+		}
+		else
+		{
+			deleteBookmarkBtn->Visible = false;
+			addBookmarkBtn->Visible = true;
+		}
+		delete converter;
 	}
 }
 
@@ -436,19 +451,51 @@ void __fastcall TWebView::bookmarksBoxSelect(TObject *Sender)
 	StringConverter *converter = new StringConverter();
 	getCurrentBrowser()
 		->Navigate(converter->convertToSystemString(bookmarks[bookmarksBox->ItemIndex].second));
+	delete converter;
 }
 
 void __fastcall TWebView::deleteBookmarkBtnClick(TObject *Sender)
 {
-	addBookmarkBtn->Visible = true;
-	deleteBookmarkBtn->Visible = false;
+    if (isLoaded /* TODO  && !bookmarkContains(convertToStdString(pageURL))*/)
+	{
+		StringConverter *converter = new StringConverter();
+		int i = 0;
+		while (converter->convertToStdString(pageURL) != bookmarks[i].second) {
+			i++;
+			if (i == bookmarks.size()) {
+				i = -1;
+				break;
+			}
+		}
+		if (i != -1) {
+			bookmarks.erase(bookmarks.begin() + index);
+            rewriteBookmarks();
+			updateBookmarksBox();
+			addBookmarkBtn->Visible = true;
+			deleteBookmarkBtn->Visible = false;
+		}
+	}
 }
-
-
 
 void __fastcall TWebView::settingsBtnClick(TObject *Sender)
 {
-    SettingsForm->Show();
+	SettingsForm->ShowModal();
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TWebView::bookmarksBoxContextPopup(TObject *Sender, TPoint &MousePos,
+          bool &Handled)
+{
+	int index = bookmarksBox->ItemIndex;//ItemAtPos(MousePos, true);
+	StringConverter *converter = new StringConverter();
+	if (converter->convertToStdString(pageURL) == bookmarks[index].second) {
+		addBookmarkBtn->Visible = true;
+		deleteBookmarkBtn->Visible = false;
+	}
+	bookmarks.erase(bookmarks.begin() + index);
+	rewriteBookmarks();
+	updateBookmarksBox();
+}
+//---------------------------------------------------------------------------
+
 

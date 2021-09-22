@@ -114,6 +114,8 @@ __published:	// IDE-managed Components
 	void __fastcall bookmarksBoxSelect(TObject *Sender);
 	void __fastcall deleteBookmarkBtnClick(TObject *Sender);
 	void __fastcall settingsBtnClick(TObject *Sender);
+	void __fastcall bookmarksBoxContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
+
 
    /*	void __fastcall TabControlDrawTab(TCustomTabControl *Control, int TabIndex,
 		  const TRect &Rect, bool Active);

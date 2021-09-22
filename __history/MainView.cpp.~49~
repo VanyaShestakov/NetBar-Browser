@@ -10,6 +10,8 @@
 #include "PageInfoUnit.h"
 #include "BookmarksReader.h"
 #include "BookmarksWriter.h"
+#include "StringConverter.h"
+#include "SettingsView.h"
 
 //---------------------------------------------------------------------------
 
@@ -33,10 +35,15 @@ void __fastcall TWebView::FormCreate(TObject *Sender)
 	createNewTab();
 	BookmarksReader *reader = new BookmarksReader();
 	bookmarks = reader->readBookmarks("test.txt");
+	StringConverter *converter = new StringConverter();
 	for (int i = 0; i < bookmarks.size(); i++)
 	{
-		bookmarksBox->Items->Add(bookmarks[i].first.c_str());
+		bookmarksBox
+			->Items
+			->Add(converter->convertToSystemString(bookmarks[i].first));
 	}
+	delete reader;
+	delete converter;
 }
 
 //BUTTONS ANIMATION/////////////////////////////////////////////////////////////
@@ -54,13 +61,13 @@ void __fastcall TWebView::backBtnMouseUp(TObject *Sender, TMouseButton Button, T
 }
 
 void __fastcall TWebView::forwardBtnMouseDown(TObject *Sender, TMouseButton Button,
-          TShiftState Shift, int X, int Y)
+		  TShiftState Shift, int X, int Y)
 {
 	forwardBtn->Top = forwardBtn->Top + ANIMATION_OFFSET;
 }
 
 void __fastcall TWebView::forwardBtnMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift,
-          int X, int Y)
+		  int X, int Y)
 {
 	forwardBtn->Top = forwardBtn->Top - ANIMATION_OFFSET;
 }
@@ -208,21 +215,21 @@ void __fastcall TWebView::updateBtnClick(TObject *Sender)
 
 void __fastcall TWebView::searchBtnClick(TObject *Sender)
 {
-	AnsiString str = addressBar->Text;
-	std::string request = str.c_str();
-	if(request.rfind(URL_PREFIX, 0) == 0)
+	StringConverter *converter = new StringConverter();
+	std::string request = converter->convertToStdString(addressBar->Text);
+	if (request.rfind(URL_PREFIX, 0) == 0)
 	{
-		getCurrentBrowser()->Navigate(str);
+		getCurrentBrowser()->Navigate(converter->convertToSystemString(request));
 	}
 	else
 	{
 		getCurrentBrowser()->Navigate(SEARCH_URL + addressBar->Text);
 	}
-
+	delete converter;
 }
 void __fastcall TWebView::homeBtnClick(TObject *Sender)
 {
-	getCurrentBrowser()->Navigate("https://www.google.com/");
+	getCurrentBrowser()->Navigate(HOMEPAGE_URL);
 }
 
 void __fastcall TWebView::addressBarClick(TObject *Sender)
@@ -251,8 +258,24 @@ void __fastcall TWebView::WebBrowserTitleChange(TObject *ASender, const WideStri
 void __fastcall TWebView::DocumentComplete(TObject *ASender, _di_IDispatch const pDisp, const OleVariant &URL)
 {
 	pageURL = URL;
-	PageControl->ActivePage->Caption = "         " + title + "         ";
+	PageControl
+		->ActivePage
+		->Caption = TAB_SPACE + title + TAB_SPACE;
 	isLoaded = true;
+	activityIndicator->StopAnimation();
+	activityIndicator->Visible = false;
+	StringConverter *converter = new StringConverter();
+	if (bookmarkContains(converter->convertToStdString(URL)))
+	{
+		deleteBookmarkBtn->Visible = true;
+		addBookmarkBtn->Visible = false;
+	}
+	else
+	{
+		deleteBookmarkBtn->Visible = false;
+		addBookmarkBtn->Visible = true;
+	}
+	delete converter;
 }
 
 void __fastcall TWebView::NewWindow3(TObject *ASender, _di_IDispatch &ppDisp, WordBool &Cancel,
@@ -309,25 +332,53 @@ void __fastcall TWebView::PageControlChange(TObject *Sender)
 	title = getCurrentBrowser()->LocationName;
 	pageURL = getCurrentBrowser()->LocationURL;
 	addressBar->Text = title;
+	StringConverter *converter = new StringConverter();
+	if (bookmarkContains(converter->convertToStdString(pageURL)))
+	{
+		deleteBookmarkBtn->Visible = true;
+		addBookmarkBtn->Visible = false;
+	}
+	else
+	{
+		deleteBookmarkBtn->Visible = false;
+		addBookmarkBtn->Visible = true;
+	}
+	delete converter;
 }
 
 void __fastcall TWebView::PageControlMouseUp(TObject *Sender, TMouseButton Button,
 		  TShiftState Shift, int X, int Y)
 {
-	if(Button == mbRight && PageControl->PageCount>1)
+	if (Button == mbRight && PageControl->PageCount > 1)
 	{
-		int i = PageControl->IndexOfTabAt(X,Y);
-		PageControl->Pages[i]->Free();
+		int index = PageControl->IndexOfTabAt(X,Y);
+		PageControl->Pages[index]->Free();
+        title = getCurrentBrowser()->LocationName;
+		pageURL = getCurrentBrowser()->LocationURL;
+		addressBar->Text = title;
+		StringConverter *converter = new StringConverter();
+		if (bookmarkContains(converter->convertToStdString(pageURL)))
+		{
+			deleteBookmarkBtn->Visible = true;
+			addBookmarkBtn->Visible = false;
+		}
+		else
+		{
+			deleteBookmarkBtn->Visible = false;
+			addBookmarkBtn->Visible = true;
+		}
+		delete converter;
 	}
 }
 
 //BOOKMARKS/////////////////////////////////////////////////////////////////////
 
-TWebBrowser* TWebView::getCurrentBrowser() {
-	return (TWebBrowser*) PageControl->ActivePage->FindChildControl(PageControl->ActivePage->Name + "_browser");
+TWebBrowser* TWebView::getCurrentBrowser()
+{
+	return (TWebBrowser*) PageControl
+		->ActivePage
+		->FindChildControl(PageControl->ActivePage->Name + "_browser");
 }
-
-
 
 
 void __fastcall TWebView::showBookmarksBtnClick(TObject *Sender)
@@ -337,32 +388,52 @@ void __fastcall TWebView::showBookmarksBtnClick(TObject *Sender)
 
 void __fastcall TWebView::addBookmarkBtnClick(TObject *Sender)
 {
-	if (isLoaded)
+
+	if (isLoaded /* TODO  && !bookmarkContains(convertToStdString(pageURL))*/)
 	{
-		BookmarksWriter *writer = new BookmarksWriter();
-		std::pair<std::string, std::string> pair;
-		pair.first = convertToStdString(title);
-		pair.second = convertToStdString(pageURL);
-		bookmarks.push_back(pair);
-		writer->writeBookmarks(bookmarks, "test.txt");
-		Application->MessageBox(L"Закладка успешно добавлена", L"NetBar", MB_OK);
+		rewriteBookmarks();
 		updateBookmarksBox();
+		addBookmarkBtn->Visible = false;
+		deleteBookmarkBtn->Visible = true;
 	}
 }
 
-std::string TWebView::convertToStdString(String str)
+void TWebView::rewriteBookmarks()
 {
-	AnsiString ansiStr = str;
-	return ansiStr.c_str();
+	BookmarksWriter *writer = new BookmarksWriter();
+	StringConverter *converter = new StringConverter();
+	std::pair<std::string, std::string> pair;
+	pair.first = converter->convertToStdString(title);
+	pair.second = converter->convertToStdString(pageURL);
+	bookmarks.push_back(pair);
+	writer->writeBookmarks(bookmarks, "test.txt");
+	delete writer;
+	delete converter;
+}
+
+bool TWebView::bookmarkContains(std::string url)
+{
+	for (int i = 0; i < bookmarks.size(); ++i)
+	{
+	   if (bookmarks[i].second == url)
+	   {
+		   return true;
+       }
+	}
+	return false;
 }
 
 void TWebView::updateBookmarksBox()
 {
+	StringConverter *converter = new StringConverter();
 	bookmarksBox->Clear();
 	for (int i = 0; i < bookmarks.size(); i++)
 	{
-		bookmarksBox->Items->Add(bookmarks[i].first.c_str());
+		bookmarksBox
+			->Items
+			->Add(converter->convertToSystemString(bookmarks[i].first));
 	}
+	delete converter;
 }
 
 void __fastcall TWebView::BeforeNavigate2(TObject *ASender, _di_IDispatch const pDisp,
@@ -371,11 +442,40 @@ void __fastcall TWebView::BeforeNavigate2(TObject *ASender, _di_IDispatch const 
 		  WordBool &Cancel)
 {
 	isLoaded = false;
+	activityIndicator->StartAnimation();
+	activityIndicator->Visible = true;
 }
 
 void __fastcall TWebView::bookmarksBoxSelect(TObject *Sender)
 {
-	getCurrentBrowser()->Navigate(bookmarks[bookmarksBox->ItemIndex].second.c_str());
+	StringConverter *converter = new StringConverter();
+	getCurrentBrowser()
+		->Navigate(converter->convertToSystemString(bookmarks[bookmarksBox->ItemIndex].second));
+}
+
+void __fastcall TWebView::deleteBookmarkBtnClick(TObject *Sender)
+{
+	addBookmarkBtn->Visible = true;
+	deleteBookmarkBtn->Visible = false;
+}
+
+void __fastcall TWebView::settingsBtnClick(TObject *Sender)
+{
+	SettingsForm->ShowModal();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TWebView::bookmarksBoxContextPopup(TObject *Sender, TPoint &MousePos,
+          bool &Handled)
+{
+	int index = bookmarksBox->ItemAtPos(MousePos, true);
+	if (pageURL == bookmarks[index])) {
+		addBookmarkBtn->Visible = true;
+		deleteBookmarkBtn->Visible = false;
+	}
+	bookmarks.erase(vector.begin() + index);
+	rewriteBookmarks();
+	updateBookmarksBox();
 }
 //---------------------------------------------------------------------------
 

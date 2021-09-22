@@ -35,6 +35,7 @@ object WebView: TWebView
   GlassFrame.Enabled = True
   GlassFrame.Top = 55
   OldCreateOrder = False
+  Position = poScreenCenter
   Scaled = False
   StyleElements = [seFont, seClient]
   OnCreate = FormCreate
@@ -44,9 +45,9 @@ object WebView: TWebView
   PixelsPerInch = 96
   TextHeight = 21
   object bookmarksBox: TComboBox
-    Left = 1007
+    Left = 904
     Top = 25
-    Width = 277
+    Width = 380
     Height = 31
     Style = csOwnerDrawFixed
     Anchors = [akTop, akRight]
@@ -62,6 +63,7 @@ object WebView: TWebView
     ParentFont = False
     PopupMenu = PopupMenu1
     TabOrder = 2
+    OnContextPopup = bookmarksBoxContextPopup
     OnSelect = bookmarksBoxSelect
   end
   object TitleBarPanel1: TTitleBarPanel

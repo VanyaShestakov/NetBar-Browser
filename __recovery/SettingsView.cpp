@@ -14,3 +14,13 @@ __fastcall TSettingsForm::TSettingsForm(TComponent* Owner)
 {
 }
 //---------------------------------------------------------------------------
+void __fastcall TSettingsForm::closeBtnClick(TObject *Sender)
+{
+    SettingsForm->Close();
+}
+//---------------------------------------------------------------------------
+void __fastcall TSettingsForm::hideBtnClick(TObject *Sender)
+{
+	Application->Minimize();
+}
+//---------------------------------------------------------------------------

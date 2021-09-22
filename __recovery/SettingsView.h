@@ -15,9 +15,10 @@ class TSettingsForm : public TForm
 {
 __published:	// IDE-managed Components
 	TImage *hideBtn;
-	TImage *expandBtn;
 	TImage *closeBtn;
 	TLabel *Label2;
+	void __fastcall closeBtnClick(TObject *Sender);
+	void __fastcall hideBtnClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TSettingsForm(TComponent* Owner);

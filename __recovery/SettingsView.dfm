@@ -2,11 +2,10 @@ object SettingsForm: TSettingsForm
   Left = 0
   Top = 0
   BorderIcons = []
-  BorderStyle = bsToolWindow
-  Caption = 'SettingsForm'
-  ClientHeight = 644
-  ClientWidth = 755
-  Color = clBtnFace
+  BorderStyle = bsDialog
+  ClientHeight = 640
+  ClientWidth = 485
+  Color = clWhite
   CustomTitleBar.Height = 50
   CustomTitleBar.SystemHeight = False
   CustomTitleBar.ShowCaption = False
@@ -29,19 +28,20 @@ object SettingsForm: TSettingsForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   StyleElements = [seFont, seClient]
   DesignSize = (
-    755
-    644)
+    485
+    640)
   PixelsPerInch = 96
   TextHeight = 13
   object Label2: TLabel
     Left = 27
-    Top = 8
+    Top = 0
     Width = 127
     Height = 39
     Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
-    Color = clBlack
+    Color = clGray
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
     Font.Height = -24
@@ -51,8 +51,8 @@ object SettingsForm: TSettingsForm
     ParentFont = False
   end
   object closeBtn: TImage
-    Left = 719
-    Top = 18
+    Left = 449
+    Top = 0
     Width = 16
     Height = 16
     Anchors = [akTop, akRight]
@@ -75,35 +75,12 @@ object SettingsForm: TSettingsForm
       929421EEA42433210152B333009DDEF4DDFB6CE27D0000000049454E44AE4260
       82}
     Stretch = True
-    ExplicitLeft = 399
-  end
-  object expandBtn: TImage
-    Left = 697
-    Top = 18
-    Width = 16
-    Height = 16
-    Anchors = [akTop, akRight]
-    AutoSize = True
-    Picture.Data = {
-      0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
-      001008060000001FF3FF610000000473424954080808087C0864880000000970
-      4859730000006F0000006F01F1A2DC430000001974455874536F667477617265
-      007777772E696E6B73636170652E6F72679BEE3C1A000000F94944415478DA63
-      FCFFFF3F0332D0DC7651ED1F0363D47F4606630606466388E8FFB38CFF19CE32
-      31FC5F76DD4BFF16B27A4698018C40A4B2FD523E2303631B90CBC9801D7CFFCF
-      F0BFEA8EA7DE44A0AEFF7003409A55B75FDE02E47B311007B6DDF6D4F5011902
-      364075FBA502A0CDFDE8AAA2E484C1F4B2476F314C00BAA4F0B6A7DE04468DAD
-      17D4FE32325DC0E6ECFD0E1A60DAF1C00DACDE61FEFFCF80516DEBC586FF8C8C
-      F5D854103000E87EC60646D56D17370383C0871C0380466C011A70E919902509
-      F373AA92285C5A8283054CBFF8F1072E36FBDE6BE430794E0D0328F402C58148
-      7134529C90A892944180A2CC840C48CDCE004D7CB1DDE08A6562000000004945
-      4E44AE426082}
-    Stretch = True
-    ExplicitLeft = 377
+    OnClick = closeBtnClick
+    ExplicitLeft = 719
   end
   object hideBtn: TImage
-    Left = 675
-    Top = 18
+    Left = 427
+    Top = 0
     Width = 16
     Height = 16
     Anchors = [akTop, akRight]
@@ -122,6 +99,6 @@ object SettingsForm: TSettingsForm
       8AA391E2844495A40C369192CC840C48CDCE00716D8D016092F8410000000049
       454E44AE426082}
     Stretch = True
-    ExplicitLeft = 355
+    OnClick = hideBtnClick
   end
 end
