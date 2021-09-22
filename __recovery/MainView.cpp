@@ -351,23 +351,9 @@ void __fastcall TWebView::PageControlMouseUp(TObject *Sender, TMouseButton Butto
 {
 	if (Button == mbRight && PageControl->PageCount > 1)
 	{
-		int index = PageControl->IndexOfTabAt(X,Y);
-		PageControl->Pages[index]->Free();
-        title = getCurrentBrowser()->LocationName;
-		pageURL = getCurrentBrowser()->LocationURL;
-		addressBar->Text = title;
-		StringConverter *converter = new StringConverter();
-		if (bookmarkContains(converter->convertToStdString(pageURL)))
-		{
-			deleteBookmarkBtn->Visible = true;
-			addBookmarkBtn->Visible = false;
-		}
-		else
-		{
-			deleteBookmarkBtn->Visible = false;
-			addBookmarkBtn->Visible = true;
-		}
-		delete converter;
+		tabPopupIndex = PageControl->IndexOfTabAt(X,Y);
+		TPoint point = GetClientOrigin();
+		tabsPopup->Popup(X + point.X, Y + point.Y + 75);
 	}
 }
 
@@ -395,6 +381,7 @@ void __fastcall TWebView::addBookmarkBtnClick(TObject *Sender)
         std::pair<std::string, std::string> pair;
 		pair.first = converter->convertToStdString(title);
 		pair.second = converter->convertToStdString(pageURL);
+		delete converter;
 		bookmarks.push_back(pair);
 		rewriteBookmarks();
 		updateBookmarksBox();
@@ -458,21 +445,25 @@ void __fastcall TWebView::deleteBookmarkBtnClick(TObject *Sender)
     if (isLoaded /* TODO  && !bookmarkContains(convertToStdString(pageURL))*/)
 	{
 		StringConverter *converter = new StringConverter();
-		int i = 0;
-		while (converter->convertToStdString(pageURL) != bookmarks[i].second) {
-			i++;
-			if (i == bookmarks.size()) {
-				i = -1;
+		int index = 0;
+		while (converter->convertToStdString(pageURL) != bookmarks[index].second)
+		{
+			index++;
+			if (index == bookmarks.size())
+			{
+				index = -1;
 				break;
 			}
 		}
-		if (i != -1) {
-			bookmarks.erase(bookmarks.begin() + i);
+		if (index != -1)
+		{
+			bookmarks.erase(bookmarks.begin() + index);
 			rewriteBookmarks();
 			updateBookmarksBox();
 			addBookmarkBtn->Visible = true;
 			deleteBookmarkBtn->Visible = false;
 		}
+		delete converter;
 	}
 }
 
@@ -480,7 +471,6 @@ void __fastcall TWebView::settingsBtnClick(TObject *Sender)
 {
 	SettingsForm->ShowModal();
 }
-//---------------------------------------------------------------------------
 
 void __fastcall TWebView::bookmarksBoxContextPopup(TObject *Sender, TPoint &MousePos,
           bool &Handled)
@@ -495,6 +485,27 @@ void __fastcall TWebView::bookmarksBoxContextPopup(TObject *Sender, TPoint &Mous
 	rewriteBookmarks();
 	updateBookmarksBox();
 }
-//---------------------------------------------------------------------------
 
+
+
+void __fastcall TWebView::closeChoiceClick(TObject *Sender)
+{
+	PageControl->Pages[tabPopupIndex]->Free();
+	title = getCurrentBrowser()->LocationName;
+	pageURL = getCurrentBrowser()->LocationURL;
+	addressBar->Text = title;
+	StringConverter *converter = new StringConverter();
+	if (bookmarkContains(converter->convertToStdString(pageURL)))
+	{
+		deleteBookmarkBtn->Visible = true;
+		addBookmarkBtn->Visible = false;
+	}
+	else
+	{
+		deleteBookmarkBtn->Visible = false;
+		addBookmarkBtn->Visible = true;
+	}
+	delete converter;
+}
+//---------------------------------------------------------------------------
 

@@ -48,9 +48,8 @@ __published:	// IDE-managed Components
 	TPageControl *PageControl;
 	TImage *showBookmarksBtn;
 	TComboBox *bookmarksBox;
-	TPopupMenu *PopupMenu1;
-	TMenuItem *vcx1;
-	TMenuItem *sdv1;
+	TPopupMenu *tabsPopup;
+	TMenuItem *closeChoice;
 	TActivityIndicator *activityIndicator;
 	TImage *deleteBookmarkBtn;
 	void __fastcall FormCreate(TObject *Sender);
@@ -115,6 +114,7 @@ __published:	// IDE-managed Components
 	void __fastcall deleteBookmarkBtnClick(TObject *Sender);
 	void __fastcall settingsBtnClick(TObject *Sender);
 	void __fastcall bookmarksBoxContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
+	void __fastcall closeChoiceClick(TObject *Sender);
 
 
    /*	void __fastcall TabControlDrawTab(TCustomTabControl *Control, int TabIndex,
@@ -146,6 +146,7 @@ public:		// User declarations
 	String pageURL = "";
 	bool isSelectedBar = false;
 	int tabId = 0;
+    int tabPopupIndex = 0;
 	std::vector<std::pair<std::string, std::string>> bookmarks;
 
 	const int ANIMATION_OFFSET = 3;

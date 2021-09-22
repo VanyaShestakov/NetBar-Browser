@@ -51,17 +51,20 @@ object WebView: TWebView
     Height = 31
     Style = csOwnerDrawFixed
     Anchors = [akTop, akRight]
+    BiDiMode = bdLeftToRight
     Color = clWhite
     DropDownCount = 15
     Enabled = False
+    ExtendedUI = True
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
     Font.Height = -15
     Font.Name = 'Segoe UI Semibold'
     Font.Style = [fsBold]
     ItemHeight = 25
+    ParentBiDiMode = False
     ParentFont = False
-    PopupMenu = PopupMenu1
+    PopupMenu = tabsPopup
     TabOrder = 2
     OnContextPopup = bookmarksBoxContextPopup
     OnSelect = bookmarksBoxSelect
@@ -384,8 +387,6 @@ object WebView: TWebView
         450C0000000049454E44AE426082}
       Stretch = True
       OnClick = showBookmarksBtnClick
-      OnMouseDown = showBookmarksBtnMouseDown
-      OnMouseUp = showBookmarksBtnMouseUp
     end
     object addBookmarkBtn: TImage
       Left = 1071
@@ -509,14 +510,12 @@ object WebView: TWebView
     OnChange = PageControlChange
     OnMouseUp = PageControlMouseUp
   end
-  object PopupMenu1: TPopupMenu
+  object tabsPopup: TPopupMenu
     Left = 1072
     Top = 344
-    object vcx1: TMenuItem
-      Caption = 'vcx'
-    end
-    object sdv1: TMenuItem
-      Caption = 'sdv'
+    object closeChoice: TMenuItem
+      Caption = #1047#1072#1082#1088#1099#1090#1100
+      OnClick = closeChoiceClick
     end
   end
 end
