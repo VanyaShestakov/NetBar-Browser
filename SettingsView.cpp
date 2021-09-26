@@ -52,10 +52,24 @@ void TSettingsForm::FolderSize(AnsiString Folder, int &Size, int &fCount, int &f
 
 void __fastcall TSettingsForm::FormShow(TObject *Sender)
 {
-	int size = 0;
+	BrowserManager *manager = new BrowserManager();
+	int size = manager->getCasheSize();
 	casheSizeLabel->Caption = IntToStr((size / 1024 / 1024)) + " MB";
-	//ShowMessage(size / 1024 / 1024);
-	//ShowMessage(count);
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TSettingsForm::clearCasheBtnClick(TObject *Sender)
+{
+	BrowserManager *manager = new BrowserManager();
+	manager->clearCashe();
+	Application
+		->MessageBox(L"Для того, чтобы изменения вступили в силу, приложение сейчас перезагрузится",
+					 L"NetBar",
+					 MB_OK | MB_ICONINFORMATION);
+	ShellExecute(0, 0, Application->ExeName.c_str(), 0, 0, SW_SHOW);
+	Application->Terminate();
+
 }
 //---------------------------------------------------------------------------
 

@@ -16,13 +16,13 @@ int BrowserManager::getFolderSize(AnsiString folder, int &size)
 
 	if (FindFirst(folder + "\\*.*", faAnyFile, searchRec) == 0)
 	{
-        do
+		do
 		{
 			if (searchRec.Name != "." && searchRec.Name != "..")
 			{
 				if ((searchRec.Attr & faDirectory) != 0)
 				{
-					FolderSize(folder + "\\" + searchRec.Name, size);
+					getFolderSize(folder + "\\" + searchRec.Name, size);
 				}
 				else
 				{
@@ -32,11 +32,20 @@ int BrowserManager::getFolderSize(AnsiString folder, int &size)
 		} while (FindNext(searchRec) == 0);
 	}
 	FindClose(searchRec);
+	return size;
 }
 
 int BrowserManager::getCasheSize()
 {
-	return getFolderSize(CASHE_PATH, 0);
+	int size = 0;
+	return getFolderSize(CASHE_PATH, size);
 }
+
+void BrowserManager::clearCashe()
+{
+	std::filesystem::remove_all(CASHE_PATH);
+}
+
+
 
 

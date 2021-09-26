@@ -11,6 +11,7 @@
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Imaging.pngimage.hpp>
 #include <Vcl.Buttons.hpp>
+#include "BrowserManager.h"
 //---------------------------------------------------------------------------
 class TSettingsForm : public TForm
 {
@@ -35,6 +36,7 @@ __published:	// IDE-managed Components
 	void __fastcall closeBtnClick(TObject *Sender);
 	void __fastcall hideBtnClick(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
+	void __fastcall clearCasheBtnClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TSettingsForm(TComponent* Owner);

@@ -265,6 +265,7 @@ object SettingsForm: TSettingsForm
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    OnClick = clearCasheBtnClick
   end
   object clearBrowserDataBtn: TBitBtn
     Left = 280

@@ -4,6 +4,8 @@
 #define BrowserManagerH
 
 #include <System.Classes.hpp>
+#include <utility>
+#include <filesystem>
 
 class BrowserManager
 {
@@ -12,7 +14,8 @@ class BrowserManager
 
 		int getFolderSize(AnsiString folder, int &size);
 	public:
-        int getCasheSize();
+		int getCasheSize();
+		void clearCashe();
 
 
 
