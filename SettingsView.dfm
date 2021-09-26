@@ -10,18 +10,6 @@ object SettingsForm: TSettingsForm
   CustomTitleBar.SystemHeight = False
   CustomTitleBar.ShowCaption = False
   CustomTitleBar.ShowIcon = False
-  CustomTitleBar.BackgroundColor = clWhite
-  CustomTitleBar.ForegroundColor = 65793
-  CustomTitleBar.InactiveBackgroundColor = clWhite
-  CustomTitleBar.InactiveForegroundColor = 10066329
-  CustomTitleBar.ButtonForegroundColor = 65793
-  CustomTitleBar.ButtonBackgroundColor = clWhite
-  CustomTitleBar.ButtonHoverForegroundColor = 65793
-  CustomTitleBar.ButtonHoverBackgroundColor = 16053492
-  CustomTitleBar.ButtonPressedForegroundColor = 65793
-  CustomTitleBar.ButtonPressedBackgroundColor = 15395562
-  CustomTitleBar.ButtonInactiveForegroundColor = 10066329
-  CustomTitleBar.ButtonInactiveBackgroundColor = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -30,16 +18,17 @@ object SettingsForm: TSettingsForm
   OldCreateOrder = False
   Position = poScreenCenter
   StyleElements = [seFont, seClient]
+  OnShow = FormShow
   DesignSize = (
     485
     640)
   PixelsPerInch = 96
   TextHeight = 13
-  object Label2: TLabel
+  object settingsTitle: TLabel
     Left = 27
     Top = 0
     Width = 127
-    Height = 39
+    Height = 32
     Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
     Color = clGray
     Font.Charset = RUSSIAN_CHARSET
@@ -100,5 +89,209 @@ object SettingsForm: TSettingsForm
       454E44AE426082}
     Stretch = True
     OnClick = hideBtnClick
+  end
+  object casheTitle: TLabel
+    Left = 27
+    Top = 216
+    Width = 37
+    Height = 25
+    Caption = #1050#1101#1096
+    Color = clGray
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object casheSizeTitle: TLabel
+    Left = 27
+    Top = 247
+    Width = 59
+    Height = 21
+    Caption = #1056#1072#1079#1084#1077#1088':'
+    Color = clGray
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object casheSizeLabel: TLabel
+    Left = 92
+    Top = 247
+    Width = 18
+    Height = 21
+    Color = clGray
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object browserDataTitle: TLabel
+    Left = 27
+    Top = 312
+    Width = 164
+    Height = 25
+    Caption = #1044#1072#1085#1085#1099#1077' '#1073#1088#1072#1091#1079#1077#1088#1072
+    Color = clGray
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object browserDataSizeTitle: TLabel
+    Left = 27
+    Top = 343
+    Width = 59
+    Height = 21
+    Caption = #1056#1072#1079#1084#1077#1088':'
+    Color = clGray
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object browserDataSizeLabel: TLabel
+    Left = 92
+    Top = 343
+    Width = 18
+    Height = 21
+    Color = clGray
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object browserHistoryTitle: TLabel
+    Left = 27
+    Top = 416
+    Width = 170
+    Height = 25
+    Caption = #1048#1089#1090#1086#1088#1080#1103' '#1073#1088#1072#1091#1079#1077#1088#1072
+    Color = clGray
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object browserHistorySizeTitle: TLabel
+    Left = 27
+    Top = 447
+    Width = 59
+    Height = 21
+    Caption = #1056#1072#1079#1084#1077#1088':'
+    Color = clGray
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object browserHistorySizeLabel: TLabel
+    Left = 92
+    Top = 447
+    Width = 18
+    Height = 21
+    Color = clGray
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label1: TLabel
+    Left = 27
+    Top = 56
+    Width = 140
+    Height = 25
+    Caption = 'NetBar Browser'
+    Color = clGray
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 27
+    Top = 87
+    Width = 130
+    Height = 21
+    Caption = #1042#1077#1088#1089#1080#1103': 1.0 (Beta)'
+    Color = clGray
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object clearCasheBtn: TBitBtn
+    Left = 312
+    Top = 238
+    Width = 153
+    Height = 34
+    Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1082#1101#1096
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 0
+  end
+  object clearBrowserDataBtn: TBitBtn
+    Left = 280
+    Top = 334
+    Width = 185
+    Height = 34
+    Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1076#1072#1085#1085#1099#1077
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 1
+  end
+  object clearBrowserHistoryBtn: TBitBtn
+    Left = 264
+    Top = 438
+    Width = 201
+    Height = 34
+    Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1080#1089#1090#1086#1088#1080#1102
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 2
   end
 end

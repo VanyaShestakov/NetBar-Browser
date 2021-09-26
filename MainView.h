@@ -54,6 +54,7 @@ __published:	// IDE-managed Components
 	TImage *deleteBookmarkBtn;
 	TPopupMenu *bookmarksPopup;
 	TMenuItem *N1;
+	TWebBrowser *WebBrowser1;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall backBtnClick(TObject *Sender);
 	void __fastcall forwardBtnClick(TObject *Sender);
