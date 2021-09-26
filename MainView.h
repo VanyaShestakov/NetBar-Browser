@@ -52,6 +52,8 @@ __published:	// IDE-managed Components
 	TMenuItem *closeChoice;
 	TActivityIndicator *activityIndicator;
 	TImage *deleteBookmarkBtn;
+	TPopupMenu *bookmarksPopup;
+	TMenuItem *N1;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall backBtnClick(TObject *Sender);
 	void __fastcall forwardBtnClick(TObject *Sender);
@@ -150,12 +152,18 @@ public:		// User declarations
 	std::vector<std::pair<std::string, std::string>> bookmarks;
 
 	const int ANIMATION_OFFSET = 3;
+    const int TAB_POPUP_OFFSET = 75;
 
 	const String NEW_TAB_CAPTION = "Новая вкладка";
 	const String HOMEPAGE_URL = "https://www.google.com/";
 	const String SEARCH_URL = "https://www.google.com/search?q=";
-    const String TAB_SPACE = "         ";
+	const String TAB_SPACE = "         ";
+
 	const std::string URL_PREFIX = "https://";
+	const std::string BOOKMARKS_FILENAME = "bookmarks";
+
+	const wchar_t* BOOKMARKS_FILE_ACCESS_WARNING = L"Файл с закладками повреждён, все изменения сохранены не будут";
+    const wchar_t* MESSAGE_TITLE = L"NetBar";
 
 };
 //---------------------------------------------------------------------------

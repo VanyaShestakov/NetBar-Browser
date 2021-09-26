@@ -34,7 +34,7 @@ void __fastcall TWebView::FormCreate(TObject *Sender)
 {
 	createNewTab();
 	BookmarksReader *reader = new BookmarksReader();
-	bookmarks = reader->readBookmarks("test.txt");
+	bookmarks = reader->readBookmarks("bookmarks");
 	StringConverter *converter = new StringConverter();
 	for (int i = 0; i < bookmarks.size(); i++)
 	{
@@ -353,24 +353,7 @@ void __fastcall TWebView::PageControlMouseUp(TObject *Sender, TMouseButton Butto
 	{
 		tabPopupIndex = PageControl->IndexOfTabAt(X,Y);
 		TPoint point = GetClientOrigin();
-        tabsPopup->Popup(X + point.X, Y + point.Y + 50);
-		/*
-		PageControl->Pages[index]->Free();
-		title = getCurrentBrowser()->LocationName;
-		pageURL = getCurrentBrowser()->LocationURL;
-		addressBar->Text = title;
-		StringConverter *converter = new StringConverter();
-		if (bookmarkContains(converter->convertToStdString(pageURL)))
-		{
-			deleteBookmarkBtn->Visible = true;
-			addBookmarkBtn->Visible = false;
-		}
-		else
-		{
-			deleteBookmarkBtn->Visible = false;
-			addBookmarkBtn->Visible = true;
-		}
-		delete converter;      */
+		tabsPopup->Popup(X + point.X, Y + point.Y + TAB_POPUP_OFFSET);
 	}
 }
 
@@ -410,8 +393,14 @@ void __fastcall TWebView::addBookmarkBtnClick(TObject *Sender)
 void TWebView::rewriteBookmarks()
 {
 	BookmarksWriter *writer = new BookmarksWriter();
-	writer->writeBookmarks(bookmarks, "test.txt");
+	bool isOpenFile = writer->writeBookmarks(bookmarks, BOOKMARKS_FILENAME);
 	delete writer;
+	if (!isOpenFile) {
+		Application
+		->MessageBox(BOOKMARKS_FILE_ACCESS_WARNING,
+					 MESSAGE_TITLE,
+					 MB_OK | MB_ICONWARNING);
+	}
 }
 
 bool TWebView::bookmarkContains(std::string url)
@@ -490,8 +479,9 @@ void __fastcall TWebView::settingsBtnClick(TObject *Sender)
 }
 
 void __fastcall TWebView::bookmarksBoxContextPopup(TObject *Sender, TPoint &MousePos,
-          bool &Handled)
+		  bool &Handled)
 {
+	/*
 	int index = bookmarksBox->ItemIndex;//ItemAtPos(MousePos, true);
 	StringConverter *converter = new StringConverter();
 	if (converter->convertToStdString(pageURL) == bookmarks[index].second) {
@@ -501,6 +491,7 @@ void __fastcall TWebView::bookmarksBoxContextPopup(TObject *Sender, TPoint &Mous
 	bookmarks.erase(bookmarks.begin() + index);
 	rewriteBookmarks();
 	updateBookmarksBox();
+		   */
 }
 
 

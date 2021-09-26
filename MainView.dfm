@@ -64,7 +64,7 @@ object WebView: TWebView
     ItemHeight = 25
     ParentBiDiMode = False
     ParentFont = False
-    PopupMenu = tabsPopup
+    PopupMenu = bookmarksPopup
     TabOrder = 2
     OnContextPopup = bookmarksBoxContextPopup
     OnSelect = bookmarksBoxSelect
@@ -506,16 +506,23 @@ object WebView: TWebView
     MultiLine = True
     ParentFont = False
     TabHeight = 25
-    TabOrder = 1
+    TabOrder = 0
     OnChange = PageControlChange
     OnMouseUp = PageControlMouseUp
   end
   object tabsPopup: TPopupMenu
-    Left = 1072
-    Top = 344
+    Left = 24
+    Top = 64
     object closeChoice: TMenuItem
       Caption = #1047#1072#1082#1088#1099#1090#1100
       OnClick = closeChoiceClick
+    end
+  end
+  object bookmarksPopup: TPopupMenu
+    Left = 96
+    Top = 64
+    object N1: TMenuItem
+      Caption = #1059#1076#1072#1083#1080#1090#1100
     end
   end
 end

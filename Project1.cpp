@@ -7,6 +7,7 @@
 #include <Vcl.Styles.hpp>
 #include <Vcl.Themes.hpp>
 USEFORM("MainView.cpp", WebView);
+USEFORM("SettingsView.cpp", SettingsForm);
 //---------------------------------------------------------------------------
 int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
@@ -15,6 +16,7 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 		Application->Initialize();
 		Application->MainFormOnTaskBar = true;
 		Application->CreateForm(__classid(TWebView), &WebView);
+		Application->CreateForm(__classid(TSettingsForm), &SettingsForm);
 		Application->Run();
 	}
 	catch (Exception &exception)

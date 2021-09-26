@@ -7,12 +7,13 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-void BookmarksWriter::writeBookmarks(std::vector<std::pair<std::string, std::string>> bookmarks, std::string path)
+bool BookmarksWriter::writeBookmarks(std::vector<std::pair<std::string, std::string>> bookmarks, std::string path)
 {
 	std::ofstream writer;
     std::string line;
 	writer.open(path);
-	if (writer.is_open())
+	bool isOpen = writer.is_open();
+	if (isOpen)
     {
 		for (int i = 0; i < bookmarks.size(); ++i)
 		{
@@ -27,4 +28,5 @@ void BookmarksWriter::writeBookmarks(std::vector<std::pair<std::string, std::str
 		}
 		writer.close();
 	}
+    return isOpen;
 }

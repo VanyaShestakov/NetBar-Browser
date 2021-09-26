@@ -7,10 +7,20 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
-TForm1 *Form1;
+TSettingsForm *SettingsForm;
 //---------------------------------------------------------------------------
-__fastcall TForm1::TForm1(TComponent* Owner)
+__fastcall TSettingsForm::TSettingsForm(TComponent* Owner)
 	: TForm(Owner)
 {
+}
+//---------------------------------------------------------------------------
+void __fastcall TSettingsForm::closeBtnClick(TObject *Sender)
+{
+    SettingsForm->Close();
+}
+//---------------------------------------------------------------------------
+void __fastcall TSettingsForm::hideBtnClick(TObject *Sender)
+{
+	Application->Minimize();
 }
 //---------------------------------------------------------------------------

@@ -11,7 +11,7 @@ class BookmarksWriter
 {
 	private:
 	public:
-		void writeBookmarks(std::vector<std::pair<std::string, std::string>> bookmarks, std::string path);
+		bool writeBookmarks(std::vector<std::pair<std::string, std::string>> bookmarks, std::string path);
 
 
 };
