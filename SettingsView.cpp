@@ -53,9 +53,6 @@ void TSettingsForm::FolderSize(AnsiString Folder, int &Size, int &fCount, int &f
 void __fastcall TSettingsForm::FormShow(TObject *Sender)
 {
 	int size = 0;
-	int count = 0;
-	int folCount = 0;
-	FolderSize("Project1.exe.WebView2\\EBWebView\\Default\\Cache", size, count, folCount);
 	casheSizeLabel->Caption = IntToStr((size / 1024 / 1024)) + " MB";
 	//ShowMessage(size / 1024 / 1024);
 	//ShowMessage(count);

@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------
+
+#ifndef BrowserManagerH
+#define BrowserManagerH
+
+#include <System.Classes.hpp>
+
+class BrowserManager
+{
+	private:
+		 int getFolderSize(AnsiString path);
+	public:
+
+
+
+
+};
+//---------------------------------------------------------------------------
+#endif
