@@ -123,7 +123,7 @@ object SettingsForm: TSettingsForm
   object casheSizeLabel: TLabel
     Left = 92
     Top = 247
-    Width = 18
+    Width = 4
     Height = 21
     Color = clGray
     Font.Charset = RUSSIAN_CHARSET
@@ -167,7 +167,7 @@ object SettingsForm: TSettingsForm
   object browserDataSizeLabel: TLabel
     Left = 92
     Top = 343
-    Width = 18
+    Width = 4
     Height = 21
     Color = clGray
     Font.Charset = RUSSIAN_CHARSET
@@ -211,7 +211,7 @@ object SettingsForm: TSettingsForm
   object browserHistorySizeLabel: TLabel
     Left = 92
     Top = 447
-    Width = 18
+    Width = 4
     Height = 21
     Color = clGray
     Font.Charset = RUSSIAN_CHARSET
@@ -280,6 +280,7 @@ object SettingsForm: TSettingsForm
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 1
+    OnClick = clearBrowserDataBtnClick
   end
   object clearBrowserHistoryBtn: TBitBtn
     Left = 264

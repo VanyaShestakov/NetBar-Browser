@@ -124,25 +124,8 @@ __published:	// IDE-managed Components
 	void __fastcall TabControlMouseDown(TObject *Sender, TMouseButton Button,
 		  TShiftState Shift, int X, int Y);      */
 
-private:	// User declarations
-public:		// User declarations
-	__fastcall TWebView(TComponent* Owner);
-	void createNewTab();
-	TWebBrowser* getCurrentBrowser();
-    void __fastcall DocumentComplete(TObject *ASender, _di_IDispatch const pDisp,
-		  const OleVariant &URL);
-	void __fastcall TitleChange(TObject *ASender, const WideString Text);
-	void __fastcall NewWindow3(TObject *ASender, _di_IDispatch &ppDisp, WordBool &Cancel,
-		   unsigned int val, const WideString bstrUrlContext, const WideString bstrUrl);
-	void __fastcall BeforeNavigate2(TObject *ASender, _di_IDispatch const pDisp,
-		  const OleVariant &URL, const OleVariant &Flags, const OleVariant &TargetFrameName,
-		  const OleVariant &PostData, const OleVariant &Headers,
-		  WordBool &Cancel);
-	void updateBookmarksBox();
-	bool bookmarkContains(std::string url);
-    void rewriteBookmarks();
-
-	bool isFullScreen = false;
+private:
+    bool isFullScreen = false;
 	bool isLoaded = true;
 	String title = "";
 	String pageURL = "";
@@ -163,7 +146,24 @@ public:		// User declarations
 	const std::string BOOKMARKS_FILENAME = "bookmarks";
 
 	const wchar_t* BOOKMARKS_FILE_ACCESS_WARNING = L"Файл с закладками повреждён, все изменения сохранены не будут";
-    const wchar_t* MESSAGE_TITLE = L"NetBar";
+	const wchar_t* MESSAGE_TITLE = L"NetBar";
+
+public:		// User declarations
+	__fastcall TWebView(TComponent* Owner);
+	void createNewTab();
+	TWebBrowser* getCurrentBrowser();
+    void __fastcall DocumentComplete(TObject *ASender, _di_IDispatch const pDisp,
+		  const OleVariant &URL);
+	void __fastcall TitleChange(TObject *ASender, const WideString Text);
+	void __fastcall NewWindow3(TObject *ASender, _di_IDispatch &ppDisp, WordBool &Cancel,
+		   unsigned int val, const WideString bstrUrlContext, const WideString bstrUrl);
+	void __fastcall BeforeNavigate2(TObject *ASender, _di_IDispatch const pDisp,
+		  const OleVariant &URL, const OleVariant &Flags, const OleVariant &TargetFrameName,
+		  const OleVariant &PostData, const OleVariant &Headers,
+		  WordBool &Cancel);
+	void updateBookmarksBox();
+	bool bookmarkContains(std::string url);
+	void rewriteBookmarks();
 
 };
 //---------------------------------------------------------------------------

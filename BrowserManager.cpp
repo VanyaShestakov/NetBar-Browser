@@ -41,9 +41,20 @@ int BrowserManager::getCasheSize()
 	return getFolderSize(CASHE_PATH, size);
 }
 
+int BrowserManager::getBrowserDataSize()
+{
+	int size = 0;
+	return getFolderSize(BROWSER_DATA_PATH, size);
+}
+
 void BrowserManager::clearCashe()
 {
-	std::filesystem::remove_all(CASHE_PATH);
+	std::filesystem::remove_all(CASHE_PATH.c_str());
+}
+
+void BrowserManager::clearBrowserData()
+{
+	std::filesystem::remove_all(BROWSER_DATA_PATH.c_str());
 }
 
 

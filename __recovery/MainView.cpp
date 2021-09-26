@@ -32,6 +32,7 @@ __fastcall TWebView::TWebView(TComponent* Owner)
 
 void __fastcall TWebView::FormCreate(TObject *Sender)
 {
+	//createNewTab();
 	createNewTab();
 	BookmarksReader *reader = new BookmarksReader();
 	bookmarks = reader->readBookmarks("bookmarks");
