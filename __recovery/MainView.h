@@ -118,13 +118,8 @@ __published:	// IDE-managed Components
 	void __fastcall bookmarksBoxContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
 	void __fastcall closeChoiceClick(TObject *Sender);
 
-
-   /*	void __fastcall TabControlDrawTab(TCustomTabControl *Control, int TabIndex,
-		  const TRect &Rect, bool Active);
-	void __fastcall TabControlMouseDown(TObject *Sender, TMouseButton Button,
-		  TShiftState Shift, int X, int Y);      */
-
 private:
+
     bool isFullScreen = false;
 	bool isLoaded = true;
 	String title = "";
@@ -132,7 +127,6 @@ private:
 	bool isSelectedBar = false;
 	int tabId = 0;
 	int tabPopupIndex = 0;
-	//std::vector<std::pair<std::string, std::string>> bookmarks;
 	BookmarksManager *bookmarksManager = new BookmarksManager();
 
 	const int ANIMATION_OFFSET = 3;
@@ -163,8 +157,6 @@ public:		// User declarations
 		  const OleVariant &PostData, const OleVariant &Headers,
 		  WordBool &Cancel);
 	void updateBookmarksBox();
-	//bool bookmarkContains(std::string url);
-	//void rewriteBookmarks();
 
 };
 //---------------------------------------------------------------------------
