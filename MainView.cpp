@@ -32,6 +32,7 @@ __fastcall TWebView::TWebView(TComponent* Owner)
 
 void __fastcall TWebView::FormCreate(TObject *Sender)
 {
+	//createNewTab();
 	createNewTab();
 	BookmarksReader *reader = new BookmarksReader();
 	bookmarks = reader->readBookmarks("bookmarks");
@@ -378,7 +379,7 @@ void __fastcall TWebView::addBookmarkBtnClick(TObject *Sender)
 	if (isLoaded /* TODO  && !bookmarkContains(convertToStdString(pageURL))*/)
 	{
 		StringConverter *converter = new StringConverter();
-        std::pair<std::string, std::string> pair;
+		std::pair<std::string, std::string> pair;
 		pair.first = converter->convertToStdString(title);
 		pair.second = converter->convertToStdString(pageURL);
 		delete converter;
@@ -410,7 +411,7 @@ bool TWebView::bookmarkContains(std::string url)
 	   if (bookmarks[i].second == url)
 	   {
 		   return true;
-       }
+	   }
 	}
 	return false;
 }

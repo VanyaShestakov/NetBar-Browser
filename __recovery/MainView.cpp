@@ -32,10 +32,8 @@ __fastcall TWebView::TWebView(TComponent* Owner)
 
 void __fastcall TWebView::FormCreate(TObject *Sender)
 {
-	//createNewTab();
 	createNewTab();
-	BookmarksReader *reader = new BookmarksReader();
-	bookmarks = reader->readBookmarks("bookmarks");
+	auto bookmarks = bookmarksManager->getBookmarks();
 	StringConverter *converter = new StringConverter();
 	for (int i = 0; i < bookmarks.size(); i++)
 	{
@@ -43,7 +41,6 @@ void __fastcall TWebView::FormCreate(TObject *Sender)
 			->Items
 			->Add(converter->convertToSystemString(bookmarks[i].first));
 	}
-	delete reader;
 	delete converter;
 }
 
@@ -266,7 +263,7 @@ void __fastcall TWebView::DocumentComplete(TObject *ASender, _di_IDispatch const
 	activityIndicator->StopAnimation();
 	activityIndicator->Visible = false;
 	StringConverter *converter = new StringConverter();
-	if (bookmarkContains(converter->convertToStdString(URL)))
+	if (bookmarksManager->contains((converter->convertToStdString(URL))))
 	{
 		deleteBookmarkBtn->Visible = true;
 		addBookmarkBtn->Visible = false;
@@ -334,7 +331,7 @@ void __fastcall TWebView::PageControlChange(TObject *Sender)
 	pageURL = getCurrentBrowser()->LocationURL;
 	addressBar->Text = title;
 	StringConverter *converter = new StringConverter();
-	if (bookmarkContains(converter->convertToStdString(pageURL)))
+	if (bookmarksManager->contains(converter->convertToStdString(pageURL)))
 	{
 		deleteBookmarkBtn->Visible = true;
 		addBookmarkBtn->Visible = false;
@@ -379,18 +376,23 @@ void __fastcall TWebView::addBookmarkBtnClick(TObject *Sender)
 	if (isLoaded /* TODO  && !bookmarkContains(convertToStdString(pageURL))*/)
 	{
 		StringConverter *converter = new StringConverter();
-        std::pair<std::string, std::string> pair;
-		pair.first = converter->convertToStdString(title);
-		pair.second = converter->convertToStdString(pageURL);
+		bool isOpenFile = bookmarksManager
+			->addBookmark(converter->convertToStdString(title),
+						  converter->convertToStdString(pageURL));
 		delete converter;
-		bookmarks.push_back(pair);
-		rewriteBookmarks();
+		if (!isOpenFile)
+		{
+			Application
+			->MessageBox(BOOKMARKS_FILE_ACCESS_WARNING,
+						 MESSAGE_TITLE,
+						 MB_OK | MB_ICONWARNING);
+		}
 		updateBookmarksBox();
 		addBookmarkBtn->Visible = false;
 		deleteBookmarkBtn->Visible = true;
 	}
 }
-
+ /*
 void TWebView::rewriteBookmarks()
 {
 	BookmarksWriter *writer = new BookmarksWriter();
@@ -402,8 +404,8 @@ void TWebView::rewriteBookmarks()
 					 MESSAGE_TITLE,
 					 MB_OK | MB_ICONWARNING);
 	}
-}
-
+}  */
+	/*
 bool TWebView::bookmarkContains(std::string url)
 {
 	for (int i = 0; i < bookmarks.size(); ++i)
@@ -411,15 +413,16 @@ bool TWebView::bookmarkContains(std::string url)
 	   if (bookmarks[i].second == url)
 	   {
 		   return true;
-       }
+	   }
 	}
 	return false;
 }
-
+	*/
 void TWebView::updateBookmarksBox()
 {
 	StringConverter *converter = new StringConverter();
 	bookmarksBox->Clear();
+	auto bookmarks = bookmarksManager->getBookmarks();
 	for (int i = 0; i < bookmarks.size(); i++)
 	{
 		bookmarksBox
@@ -442,6 +445,7 @@ void __fastcall TWebView::BeforeNavigate2(TObject *ASender, _di_IDispatch const 
 void __fastcall TWebView::bookmarksBoxSelect(TObject *Sender)
 {
 	StringConverter *converter = new StringConverter();
+	auto bookmarks = bookmarksManager->getBookmarks();
 	getCurrentBrowser()
 		->Navigate(converter->convertToSystemString(bookmarks[bookmarksBox->ItemIndex].second));
 	delete converter;
@@ -452,7 +456,7 @@ void __fastcall TWebView::deleteBookmarkBtnClick(TObject *Sender)
     if (isLoaded /* TODO  && !bookmarkContains(convertToStdString(pageURL))*/)
 	{
 		StringConverter *converter = new StringConverter();
-		int index = 0;
+	   /*	int index = 0;
 		while (converter->convertToStdString(pageURL) != bookmarks[index].second)
 		{
 			index++;
@@ -469,7 +473,19 @@ void __fastcall TWebView::deleteBookmarkBtnClick(TObject *Sender)
 			updateBookmarksBox();
 			addBookmarkBtn->Visible = true;
 			deleteBookmarkBtn->Visible = false;
+		}     */
+
+		bool isOpenFile = bookmarksManager->removeBookmark(converter->convertToStdString(pageURL));
+        if (!isOpenFile)
+		{
+			Application
+				->MessageBox(BOOKMARKS_FILE_ACCESS_WARNING,
+						 MESSAGE_TITLE,
+						 MB_OK | MB_ICONWARNING);
 		}
+        updateBookmarksBox();
+		addBookmarkBtn->Visible = true;
+		deleteBookmarkBtn->Visible = false;
 		delete converter;
 	}
 }
@@ -504,7 +520,7 @@ void __fastcall TWebView::closeChoiceClick(TObject *Sender)
 	pageURL = getCurrentBrowser()->LocationURL;
 	addressBar->Text = title;
 	StringConverter *converter = new StringConverter();
-	if (bookmarkContains(converter->convertToStdString(pageURL)))
+	if (bookmarksManager->contains(converter->convertToStdString(pageURL)))
 	{
 		deleteBookmarkBtn->Visible = true;
 		addBookmarkBtn->Visible = false;

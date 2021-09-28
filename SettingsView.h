@@ -34,6 +34,7 @@ __published:	// IDE-managed Components
 	TBitBtn *clearBrowserHistoryBtn;
 	TLabel *Label1;
 	TLabel *Label2;
+	TImage *Image1;
 	void __fastcall closeBtnClick(TObject *Sender);
 	void __fastcall hideBtnClick(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);

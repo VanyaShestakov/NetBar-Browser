@@ -22,7 +22,49 @@ bool BookmarksManager::writeBookmarks(std::string path)
 	return writer->writeBookmarks(bookmarks, path);
 }
 
-void BookmarksManager::writeBookmarks(std::string path)
+bool BookmarksManager::addBookmark(std::string title, std::string url)
 {
-	return writer->writeBookmarks(bookmarks, path);
+    std::pair<std::string, std::string> pair;
+	pair.first = title;
+	pair.second = url;
+	bookmarks.push_back(pair);
+	return writeBookmarks(bookmarks, "bookmarks");
 }
+
+bool BookmarksManager::contains(std::string url)
+{
+	for (int i = 0; i < bookmarks.size(); ++i)
+	{
+	   if (bookmarks[i].second == url)
+	   {
+		   return true;
+	   }
+	}
+	return false;
+}
+
+bool BookmarksManager::removeBookmark(std::string url)
+{
+	int index = 0;
+	while (url != bookmarks[index].second)
+	{
+		index++;
+		if (index == bookmarks.size())
+		{
+			return false;
+		}
+	}
+	bookmarks.erase(bookmarks.begin() + index);
+	return writeBookmarks(bookmarks, "bookmarks");
+}
+
+std::vector<std::pair<std::string, std::string>> BookmarksManager::getBookmarks()
+{
+	return bookmarks;
+}
+
+int BookmarksManager::getSize()
+{
+	return bookmarks.size();
+}
+
