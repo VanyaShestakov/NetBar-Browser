@@ -48,11 +48,12 @@ __published:	// IDE-managed Components
 	TPageControl *PageControl;
 	TImage *showBookmarksBtn;
 	TComboBox *bookmarksBox;
-	TPopupMenu *PopupMenu1;
-	TMenuItem *vcx1;
-	TMenuItem *sdv1;
+	TPopupMenu *tabsPopup;
+	TMenuItem *closeChoice;
 	TActivityIndicator *activityIndicator;
 	TImage *deleteBookmarkBtn;
+	TPopupMenu *bookmarksPopup;
+	TMenuItem *N1;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall backBtnClick(TObject *Sender);
 	void __fastcall forwardBtnClick(TObject *Sender);
@@ -115,6 +116,7 @@ __published:	// IDE-managed Components
 	void __fastcall deleteBookmarkBtnClick(TObject *Sender);
 	void __fastcall settingsBtnClick(TObject *Sender);
 	void __fastcall bookmarksBoxContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
+	void __fastcall closeChoiceClick(TObject *Sender);
 
 
    /*	void __fastcall TabControlDrawTab(TCustomTabControl *Control, int TabIndex,
@@ -122,7 +124,30 @@ __published:	// IDE-managed Components
 	void __fastcall TabControlMouseDown(TObject *Sender, TMouseButton Button,
 		  TShiftState Shift, int X, int Y);      */
 
-private:	// User declarations
+private:
+    bool isFullScreen = false;
+	bool isLoaded = true;
+	String title = "";
+	String pageURL = "";
+	bool isSelectedBar = false;
+	int tabId = 0;
+    int tabPopupIndex = 0;
+	std::vector<std::pair<std::string, std::string>> bookmarks;
+
+	const int ANIMATION_OFFSET = 3;
+    const int TAB_POPUP_OFFSET = 75;
+
+	const String NEW_TAB_CAPTION = "Новая вкладка";
+	const String HOMEPAGE_URL = "https://www.google.com/";
+	const String SEARCH_URL = "https://www.google.com/search?q=";
+	const String TAB_SPACE = "         ";
+
+	const std::string URL_PREFIX = "https://";
+	const std::string BOOKMARKS_FILENAME = "bookmarks";
+
+	const wchar_t* BOOKMARKS_FILE_ACCESS_WARNING = L"Файл с закладками повреждён, все изменения сохранены не будут";
+	const wchar_t* MESSAGE_TITLE = L"NetBar";
+
 public:		// User declarations
 	__fastcall TWebView(TComponent* Owner);
 	void createNewTab();
@@ -138,23 +163,7 @@ public:		// User declarations
 		  WordBool &Cancel);
 	void updateBookmarksBox();
 	bool bookmarkContains(std::string url);
-    void rewriteBookmarks();
-
-	bool isFullScreen = false;
-	bool isLoaded = true;
-	String title = "";
-	String pageURL = "";
-	bool isSelectedBar = false;
-	int tabId = 0;
-	std::vector<std::pair<std::string, std::string>> bookmarks;
-
-	const int ANIMATION_OFFSET = 3;
-
-	const String NEW_TAB_CAPTION = "Новая вкладка";
-	const String HOMEPAGE_URL = "https://www.google.com/";
-	const String SEARCH_URL = "https://www.google.com/search?q=";
-    const String TAB_SPACE = "         ";
-	const std::string URL_PREFIX = "https://";
+	void rewriteBookmarks();
 
 };
 //---------------------------------------------------------------------------

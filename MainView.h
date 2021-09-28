@@ -26,7 +26,7 @@
 #include <utility>
 
 
-#include "PageInfoUnit.h"
+#include "BookmarksManager.h"
 //---------------------------------------------------------------------------
 class TWebView : public TForm
 {
@@ -118,24 +118,19 @@ __published:	// IDE-managed Components
 	void __fastcall bookmarksBoxContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
 	void __fastcall closeChoiceClick(TObject *Sender);
 
-
-   /*	void __fastcall TabControlDrawTab(TCustomTabControl *Control, int TabIndex,
-		  const TRect &Rect, bool Active);
-	void __fastcall TabControlMouseDown(TObject *Sender, TMouseButton Button,
-		  TShiftState Shift, int X, int Y);      */
-
 private:
+
     bool isFullScreen = false;
 	bool isLoaded = true;
 	String title = "";
 	String pageURL = "";
 	bool isSelectedBar = false;
 	int tabId = 0;
-    int tabPopupIndex = 0;
-	std::vector<std::pair<std::string, std::string>> bookmarks;
+	int tabPopupIndex = 0;
+	BookmarksManager *bookmarksManager = new BookmarksManager();
 
 	const int ANIMATION_OFFSET = 3;
-    const int TAB_POPUP_OFFSET = 75;
+	const int TAB_POPUP_OFFSET = 75;
 
 	const String NEW_TAB_CAPTION = "Новая вкладка";
 	const String HOMEPAGE_URL = "https://www.google.com/";
@@ -162,8 +157,6 @@ public:		// User declarations
 		  const OleVariant &PostData, const OleVariant &Headers,
 		  WordBool &Cancel);
 	void updateBookmarksBox();
-	bool bookmarkContains(std::string url);
-	void rewriteBookmarks();
 
 };
 //---------------------------------------------------------------------------
