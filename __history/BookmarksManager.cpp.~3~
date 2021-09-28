@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------
+
+#pragma hdrstop
+
+#include "BookmarksManager.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+
+BookmarksManager::BookmarksManager()
+{
+	*writer = new BookmarksWriter();
+	*reader = new BookmarksReader();
+}
