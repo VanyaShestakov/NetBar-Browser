@@ -127,7 +127,6 @@ private:
 	bool isSelectedBar = false;
 	int tabId = 0;
 	int tabPopupIndex = 0;
-	BookmarksManager *bookmarksManager = new BookmarksManager();
 
 	const int ANIMATION_OFFSET = 3;
 	const int TAB_POPUP_OFFSET = 75;
@@ -157,6 +156,9 @@ public:		// User declarations
 		  const OleVariant &PostData, const OleVariant &Headers,
 		  WordBool &Cancel);
 	void updateBookmarksBox();
+
+
+    BookmarksManager *bookmarksManager = new BookmarksManager();
 
 };
 //---------------------------------------------------------------------------

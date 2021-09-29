@@ -53,21 +53,18 @@ void TSettingsForm::FolderSize(AnsiString Folder, int &Size, int &fCount, int &f
 
 void __fastcall TSettingsForm::FormShow(TObject *Sender)
 {
-	BrowserManager *manager = new BrowserManager();
-	int casheSize = manager->getCasheSize();
-	int browserDataSize = manager->getBrowserDataSize();
+	int casheSize = browserManager->getCasheSize();
+	int browserDataSize = browserManager->getBrowserDataSize();
 	casheSizeLabel->Caption = IntToStr((casheSize / KB_SIZE / KB_SIZE)) + " MB";
 	browserDataSizeLabel->Caption = IntToStr((browserDataSize / KB_SIZE / KB_SIZE)) + " MB";
-	delete manager;
-	//delete WebView->PageControl;
-
+	bookmarksAmountLabel->Caption = IntToStr(WebView->bookmarksManager->getSize());
+	//ShowMessage(IntToStr(bookmarksManager->getSize()));
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TSettingsForm::clearCasheBtnClick(TObject *Sender)
 {
-	BrowserManager *manager = new BrowserManager();
-	manager->clearCashe();
+	browserManager->clearCashe();
 	Application
 		->MessageBox(RESTART_WARNING,
 					 MESSAGE_TITLE,
@@ -84,10 +81,21 @@ void __fastcall TSettingsForm::clearBrowserDataBtnClick(TObject *Sender)
 	{
 		delete WebView->PageControl;
 		Sleep(100);
-		BrowserManager *manager = new BrowserManager();
-		manager->clearBrowserData();
+		browserManager->clearBrowserData();
 		ShellExecute(0, 0, Application->ExeName.c_str(), 0, 0, SW_SHOW);
 		Application->Terminate();
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TSettingsForm::clearBookmarksBtnClick(TObject *Sender)
+{
+	if (Application->MessageBox(BOOKMARKS_CLEANING_WARNING, MESSAGE_TITLE, 
+		MB_YESNO | MB_ICONINFORMATION) == IDYES) 
+	{
+		WebView->bookmarksManager->clearBookmarks();
+		WebView->bookmarksBox->Clear();
+		bookmarksAmountLabel->Caption = IntToStr(WebView->bookmarksManager->getSize());
 	}
 }
 //---------------------------------------------------------------------------

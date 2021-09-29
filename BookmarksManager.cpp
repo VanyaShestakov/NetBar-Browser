@@ -8,8 +8,9 @@
 
 BookmarksManager::BookmarksManager()
 {
-	*writer = new BookmarksWriter();
-	*reader = new BookmarksReader();
+	writer = new BookmarksWriter();
+	reader = new BookmarksReader();
+	readBookmarks("bookmarks");
 }
 
 void BookmarksManager::readBookmarks(std::string path)
@@ -24,11 +25,17 @@ bool BookmarksManager::writeBookmarks(std::string path)
 
 bool BookmarksManager::addBookmark(std::string title, std::string url)
 {
-    std::pair<std::string, std::string> pair;
+	std::pair<std::string, std::string> pair;
 	pair.first = title;
 	pair.second = url;
 	bookmarks.push_back(pair);
-	return writeBookmarks(bookmarks, "bookmarks");
+	return writeBookmarks("bookmarks");
+}
+
+bool BookmarksManager::clearBookmarks()
+{
+	bookmarks.clear();
+    return writeBookmarks("bookmarks");
 }
 
 bool BookmarksManager::contains(std::string url)
@@ -51,11 +58,15 @@ bool BookmarksManager::removeBookmark(std::string url)
 		index++;
 		if (index == bookmarks.size())
 		{
-			return false;
+			index = -1;
+			break;
 		}
 	}
-	bookmarks.erase(bookmarks.begin() + index);
-	return writeBookmarks(bookmarks, "bookmarks");
+	if (index != -1) {
+        bookmarks.erase(bookmarks.begin() + index);
+		return writeBookmarks("bookmarks");
+	}
+	return false;
 }
 
 std::vector<std::pair<std::string, std::string>> BookmarksManager::getBookmarks()

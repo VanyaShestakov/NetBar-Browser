@@ -15,11 +15,20 @@ class BookmarksManager
 {
 	private:
 		std::vector<std::pair<std::string, std::string>> bookmarks;
-		BookmarksWriter writer;
-		BookmarksReader reader;
+		BookmarksWriter *writer;
+		BookmarksReader *reader;
+
+		void readBookmarks(std::string path);
+		bool writeBookmarks(std::string path);
+
 	public:
 		BookmarksManager();
-		void readBookmarks(std::string path);
+		bool addBookmark(std::string title, std::string url);
+		bool contains(std::string url);
+		bool removeBookmark(std::string url);
+        bool clearBookmarks()
+		std::vector<std::pair<std::string, std::string>> getBookmarks();
+		int getSize();
 
 
 };

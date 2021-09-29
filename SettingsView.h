@@ -35,17 +35,29 @@ __published:	// IDE-managed Components
 	TLabel *Label1;
 	TLabel *Label2;
 	TImage *Image1;
+	TLabel *bookmarksTitle;
+	TLabel *bookmarksAmountTitle;
+	TLabel *Label5;
+	TBitBtn *clearBookmarksBtn;
+	TLabel *bookmarksAmountLabel;
 	void __fastcall closeBtnClick(TObject *Sender);
 	void __fastcall hideBtnClick(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall clearCasheBtnClick(TObject *Sender);
 	void __fastcall clearBrowserDataBtnClick(TObject *Sender);
+	void __fastcall clearBookmarksBtnClick(TObject *Sender);
 private:	// User declarations
+
+	BrowserManager *browserManager = new BrowserManager();
+	BookmarksManager *bookmarksManager = new BookmarksManager();
+
+
     const int KB_SIZE = 1024;
 
 	const wchar_t* MESSAGE_TITLE = L"NetBar";
 	const wchar_t* RESTART_WARNING = L"Для того, чтобы изменения вступили в силу, приложение сейчас перезапустится";
 	const wchar_t* BROWSER_CLEANING_WARNING = L"Очистка данных браузера приведёт к удалению всех паролей, cookie файлов, кэша и др. После очистки приложение будет перезапущено. Вы действительно хотите очистить все данные браузера?";
+	const wchar_t* BOOKMARKS_CLEANING_WARNING = L"Вы действительно хотите удалить все закладки безвозвратно";
 public:		// User declarations
 	__fastcall TSettingsForm(TComponent* Owner);
     void FolderSize(AnsiString Folder, int &Size, int &fCount, int &folCount);
