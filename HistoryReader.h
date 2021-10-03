@@ -3,6 +3,8 @@
 #ifndef HistoryReaderH
 #define HistoryReaderH
 
+#include "SiteVisit.h";
+
 #include <vector>
 #include <utility>
 #include <fstream>
@@ -12,7 +14,7 @@ class HistoryReader
 {
 	private:
 	public:
-		std::vector<std::string> readHistory(std::string path);
+		std::vector<SiteVisit> readHistory(std::string path);
 
 
 };

@@ -27,6 +27,7 @@
 
 
 #include "BookmarksManager.h"
+#include "HistoryManager.h"
 //---------------------------------------------------------------------------
 class TWebView : public TForm
 {
@@ -160,7 +161,8 @@ public:		// User declarations
 	void updateBookmarksBox();
 
 
-    BookmarksManager *bookmarksManager = new BookmarksManager();
+	BookmarksManager *bookmarksManager = new BookmarksManager();
+	HistoryManager *historyManager = new HistoryManager();
 
 };
 //---------------------------------------------------------------------------

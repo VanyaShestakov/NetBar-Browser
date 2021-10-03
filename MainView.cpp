@@ -263,6 +263,9 @@ void __fastcall TWebView::DocumentComplete(TObject *ASender, _di_IDispatch const
 	activityIndicator->StopAnimation();
 	activityIndicator->Visible = false;
 	StringConverter *converter = new StringConverter();
+    time_t now = time(0);
+	std::string dt = ctime(&now);
+	historyManager->addSiteVisit(dt, converter->convertToStdString(title), converter->convertToStdString(URL));
 	if (bookmarksManager->contains((converter->convertToStdString(URL))))
 	{
 		deleteBookmarkBtn->Visible = true;

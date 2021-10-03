@@ -78,6 +78,7 @@ object WebView: TWebView
     Width = 1284
     Height = 54
     CustomButtons = <>
+    ExplicitWidth = 304
     DesignSize = (
       1284
       54)

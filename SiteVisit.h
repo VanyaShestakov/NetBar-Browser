@@ -4,6 +4,7 @@
 #define SiteVisitH
 //---------------------------------------------------------------------------
 
+#include <utility>
 
 class SiteVisit
 {
