@@ -6,8 +6,8 @@
 //---------------------------------------------------------------------------
 #include <Vcl.Styles.hpp>
 #include <Vcl.Themes.hpp>
-USEFORM("MainView.cpp", WebView);
 USEFORM("SettingsView.cpp", SettingsForm);
+USEFORM("MainView.cpp", WebView);
 //---------------------------------------------------------------------------
 int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {

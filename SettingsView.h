@@ -49,7 +49,7 @@ __published:	// IDE-managed Components
 private:	// User declarations
 
 	BrowserManager *browserManager = new BrowserManager();
-	BookmarksManager *bookmarksManager = new BookmarksManager();
+	//BookmarksManager *bookmarksManager = new BookmarksManager();
 
 
     const int KB_SIZE = 1024;

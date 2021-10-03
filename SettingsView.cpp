@@ -80,7 +80,7 @@ void __fastcall TSettingsForm::clearBrowserDataBtnClick(TObject *Sender)
 		MB_YESNO | MB_ICONINFORMATION) == IDYES) 
 	{
 		delete WebView->PageControl;
-		Sleep(100);
+		Sleep(200);
 		browserManager->clearBrowserData();
 		ShellExecute(0, 0, Application->ExeName.c_str(), 0, 0, SW_SHOW);
 		Application->Terminate();

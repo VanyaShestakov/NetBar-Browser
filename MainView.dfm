@@ -34,11 +34,14 @@ object WebView: TWebView
   Font.Style = [fsBold]
   GlassFrame.Enabled = True
   GlassFrame.Top = 55
+  KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
   Scaled = False
   StyleElements = [seFont, seClient]
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  OnKeyPress = FormKeyPress
   DesignSize = (
     1284
     815)
@@ -256,8 +259,6 @@ object WebView: TWebView
         494AA6E43402A8920FF00100F204BF63E698146F0000000049454E44AE426082}
       Stretch = True
       OnClick = settingsBtnClick
-      OnMouseDown = settingsBtnMouseDown
-      OnMouseUp = settingsBtnMouseUp
     end
     object closeBtn: TImage
       Left = 1255

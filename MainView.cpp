@@ -489,3 +489,20 @@ void __fastcall TWebView::closeChoiceClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TWebView::FormKeyPress(TObject *Sender, System::WideChar &Key)
+{
+	//if(Key == VK_F4 && Shift.Contains(ssAlt)) {Key = 0;}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TWebView::FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
+
+{
+	if (Shift.Contains(ssAlt))
+	{
+		ShowMessage("");
+		Key = 0;
+	}
+}
+//---------------------------------------------------------------------------
+

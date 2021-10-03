@@ -117,6 +117,8 @@ __published:	// IDE-managed Components
 	void __fastcall settingsBtnClick(TObject *Sender);
 	void __fastcall bookmarksBoxContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
 	void __fastcall closeChoiceClick(TObject *Sender);
+	void __fastcall FormKeyPress(TObject *Sender, System::WideChar &Key);
+	void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 
 private:
 
