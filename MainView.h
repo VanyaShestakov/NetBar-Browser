@@ -145,7 +145,7 @@ private:
 	const wchar_t* BOOKMARKS_FILE_ACCESS_WARNING = L"Файл с закладками повреждён, все изменения сохранены не будут";
 	const wchar_t* MESSAGE_TITLE = L"NetBar";
 
-public:		// User declarations
+public:
 	__fastcall TWebView(TComponent* Owner);
 	void createNewTab();
 	TWebBrowser* getCurrentBrowser();

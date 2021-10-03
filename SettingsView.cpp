@@ -10,7 +10,6 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TSettingsForm *SettingsForm;
-//---------------------------------------------------------------------------
 __fastcall TSettingsForm::TSettingsForm(TComponent* Owner)
 	: TForm(Owner)
 {
@@ -62,9 +61,10 @@ void __fastcall TSettingsForm::FormShow(TObject *Sender)
 	bookmarksAmountLabel->Caption = IntToStr(WebView->bookmarksManager->getSize());
 	browserHistorySizeLabel->Caption = IntToStr(WebView->historyManager->getSize());
 	updateHistoryBox();
-	//ShowMessage(IntToStr(bookmarksManager->getSize()));
+    isOpenedHistory = false;
+	SettingsForm->Height = DEFAULT_HEIGHT;
+    showHistoryBtn->Caption = "Показать историю";
 }
-//---------------------------------------------------------------------------
 
 void __fastcall TSettingsForm::clearCasheBtnClick(TObject *Sender)
 {
@@ -90,7 +90,6 @@ void __fastcall TSettingsForm::clearBrowserDataBtnClick(TObject *Sender)
 		Application->Terminate();
 	}
 }
-//---------------------------------------------------------------------------
 
 void __fastcall TSettingsForm::clearBookmarksBtnClick(TObject *Sender)
 {
@@ -111,8 +110,32 @@ void TSettingsForm::updateHistoryBox()
 	{
 		historyBox->Items->Add((history[i].getTime() + " - " +
 								history[i].getTitle()).c_str());
-
 	}
+}
+
+
+void __fastcall TSettingsForm::clearBrowserHistoryBtnClick(TObject *Sender)
+{
+	WebView->historyManager->clearHistory();
+	historyBox->Clear();
+	browserHistorySizeLabel->Caption = IntToStr(WebView->historyManager->getSize());
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TSettingsForm::showHistoryBtnClick(TObject *Sender)
+{
+	if (isOpenedHistory)
+	{
+		isOpenedHistory = false;
+		SettingsForm->Height = DEFAULT_HEIGHT;
+		showHistoryBtn->Caption = "Показать историю";
+	}
+	else
+	{
+		isOpenedHistory = true;
+		SettingsForm->Height = EXTENDED_HEIGHT;
+		showHistoryBtn->Caption = "Скрыть историю";
+    }
 }
 //---------------------------------------------------------------------------
 

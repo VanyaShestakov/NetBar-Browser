@@ -4,7 +4,7 @@
 #define SiteVisitH
 //---------------------------------------------------------------------------
 
-#include <utility>
+#include <string>
 
 class SiteVisit
 {

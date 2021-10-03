@@ -3,7 +3,7 @@ object SettingsForm: TSettingsForm
   Top = 0
   BorderIcons = []
   BorderStyle = bsDialog
-  ClientHeight = 758
+  ClientHeight = 808
   ClientWidth = 485
   Color = clBtnHighlight
   CustomTitleBar.Height = 50
@@ -21,7 +21,7 @@ object SettingsForm: TSettingsForm
   OnShow = FormShow
   DesignSize = (
     485
-    758)
+    808)
   PixelsPerInch = 96
   TextHeight = 13
   object settingsTitle: TLabel
@@ -342,7 +342,7 @@ object SettingsForm: TSettingsForm
   end
   object clearBrowserHistoryBtn: TBitBtn
     Left = 264
-    Top = 494
+    Top = 766
     Width = 201
     Height = 34
     Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1080#1089#1090#1086#1088#1080#1102
@@ -353,6 +353,7 @@ object SettingsForm: TSettingsForm
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 2
+    OnClick = clearBrowserHistoryBtnClick
   end
   object clearBookmarksBtn: TBitBtn
     Left = 264
@@ -371,7 +372,7 @@ object SettingsForm: TSettingsForm
   end
   object historyBox: TListBox
     Left = 27
-    Top = 547
+    Top = 570
     Width = 438
     Height = 190
     Cursor = crHandPoint
@@ -391,5 +392,20 @@ object SettingsForm: TSettingsForm
     ParentBiDiMode = False
     ParentFont = False
     TabOrder = 4
+  end
+  object showHistoryBtn: TBitBtn
+    Left = 264
+    Top = 490
+    Width = 201
+    Height = 34
+    Caption = #1055#1086#1082#1072#1079#1072#1090#1100' '#1080#1089#1090#1086#1088#1080#1102
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 5
+    OnClick = showHistoryBtnClick
   end
 end

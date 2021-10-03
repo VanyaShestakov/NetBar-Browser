@@ -78,7 +78,6 @@ object WebView: TWebView
     Width = 1284
     Height = 54
     CustomButtons = <>
-    ExplicitWidth = 304
     DesignSize = (
       1284
       54)
@@ -87,6 +86,7 @@ object WebView: TWebView
       Top = 15
       Width = 24
       Height = 24
+      Cursor = crHandPoint
       AutoSize = True
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000000180000
@@ -112,6 +112,7 @@ object WebView: TWebView
       Top = 15
       Width = 24
       Height = 24
+      Cursor = crHandPoint
       AutoSize = True
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000000180000
@@ -138,6 +139,7 @@ object WebView: TWebView
       Top = 15
       Width = 24
       Height = 24
+      Cursor = crHandPoint
       AutoSize = True
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000000180000
@@ -170,6 +172,7 @@ object WebView: TWebView
       Top = 15
       Width = 24
       Height = 24
+      Cursor = crHandPoint
       AutoSize = True
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000000180000
@@ -203,6 +206,7 @@ object WebView: TWebView
       Top = 15
       Width = 24
       Height = 24
+      Cursor = crHandPoint
       Anchors = [akTop, akRight]
       AutoSize = True
       Picture.Data = {
@@ -242,6 +246,7 @@ object WebView: TWebView
       Top = 15
       Width = 24
       Height = 24
+      Cursor = crHandPoint
       Anchors = [akTop, akRight]
       AutoSize = True
       Picture.Data = {
@@ -266,6 +271,7 @@ object WebView: TWebView
       Top = 18
       Width = 16
       Height = 16
+      Cursor = crHandPoint
       Anchors = [akTop, akRight]
       AutoSize = True
       Picture.Data = {
@@ -295,6 +301,7 @@ object WebView: TWebView
       Top = 18
       Width = 16
       Height = 16
+      Cursor = crHandPoint
       Anchors = [akTop, akRight]
       AutoSize = True
       Picture.Data = {
@@ -319,6 +326,7 @@ object WebView: TWebView
       Top = 18
       Width = 16
       Height = 16
+      Cursor = crHandPoint
       Anchors = [akTop, akRight]
       AutoSize = True
       Picture.Data = {
@@ -344,6 +352,7 @@ object WebView: TWebView
       Top = 15
       Width = 24
       Height = 24
+      Cursor = crHandPoint
       AutoSize = True
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000000180000
@@ -371,6 +380,7 @@ object WebView: TWebView
       Top = 15
       Width = 24
       Height = 24
+      Cursor = crHandPoint
       Anchors = [akTop, akRight]
       AutoSize = True
       Picture.Data = {
@@ -435,6 +445,7 @@ object WebView: TWebView
       Top = 15
       Width = 24
       Height = 24
+      Cursor = crHandPoint
       Anchors = [akTop, akRight]
       AutoSize = True
       Picture.Data = {

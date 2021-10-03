@@ -9,21 +9,21 @@
 
 SiteVisit::SiteVisit(std::string title, std::string url, std::string time)
 {
-	this.title = title;
-	this.url = url;
-	this.time = time;
-}              '
-
-std::string getTitle()
-{
-	return this.title;
+	this->title = title;
+	this->url = url;
+	this->time = time;
 }
 
-std::string getUrl()
+std::string SiteVisit::getTitle()
 {
-	return this.url;
+	return this->title;
 }
-std::string getTime()
+
+std::string SiteVisit::getUrl()
 {
-    return this.time;
+	return this->url;
+}
+std::string SiteVisit::getTime()
+{
+	return this->time;
 }

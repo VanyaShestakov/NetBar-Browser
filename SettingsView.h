@@ -40,19 +40,24 @@ __published:	// IDE-managed Components
 	TBitBtn *clearBookmarksBtn;
 	TLabel *bookmarksAmountLabel;
 	TListBox *historyBox;
+	TBitBtn *showHistoryBtn;
 	void __fastcall closeBtnClick(TObject *Sender);
 	void __fastcall hideBtnClick(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall clearCasheBtnClick(TObject *Sender);
 	void __fastcall clearBrowserDataBtnClick(TObject *Sender);
 	void __fastcall clearBookmarksBtnClick(TObject *Sender);
+	void __fastcall clearBrowserHistoryBtnClick(TObject *Sender);
+	void __fastcall showHistoryBtnClick(TObject *Sender);
 private:	// User declarations
 
 	BrowserManager *browserManager = new BrowserManager();
-	//BookmarksManager *bookmarksManager = new BookmarksManager();
+	bool isOpenedHistory;
 
 
-    const int KB_SIZE = 1024;
+	const int KB_SIZE = 1024;
+	const int EXTENDED_HEIGHT = 840;
+    const int DEFAULT_HEIGHT = 600;
 
 	const wchar_t* MESSAGE_TITLE = L"NetBar";
 	const wchar_t* RESTART_WARNING = L"Для того, чтобы изменения вступили в силу, приложение сейчас перезапустится";
