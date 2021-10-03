@@ -60,7 +60,8 @@ private:	// User declarations
 	const wchar_t* BOOKMARKS_CLEANING_WARNING = L"Вы действительно хотите удалить все закладки безвозвратно";
 public:		// User declarations
 	__fastcall TSettingsForm(TComponent* Owner);
-    void FolderSize(AnsiString Folder, int &Size, int &fCount, int &folCount);
+	void FolderSize(AnsiString Folder, int &Size, int &fCount, int &folCount);
+	void updateHistoryBox();
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TSettingsForm *SettingsForm;
