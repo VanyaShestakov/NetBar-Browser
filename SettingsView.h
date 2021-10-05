@@ -49,6 +49,7 @@ __published:	// IDE-managed Components
 	void __fastcall clearBookmarksBtnClick(TObject *Sender);
 	void __fastcall clearBrowserHistoryBtnClick(TObject *Sender);
 	void __fastcall showHistoryBtnClick(TObject *Sender);
+	void __fastcall historyBoxDblClick(TObject *Sender);
 private:	// User declarations
 
 	BrowserManager *browserManager = new BrowserManager();

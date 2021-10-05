@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="17e49547-e45f-4155-8a13-c1eaf8f97afc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/MainView.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/MainView.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainView.h" beforeDir="false" afterPath="$PROJECT_DIR$/MainView.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1.cbproj.local" beforeDir="false" afterPath="$PROJECT_DIR$/Project1.cbproj.local" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SettingsView.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/SettingsView.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SettingsView.dfm" beforeDir="false" afterPath="$PROJECT_DIR$/SettingsView.dfm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SettingsView.h" beforeDir="false" afterPath="$PROJECT_DIR$/SettingsView.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Win32/Debug/MainView.obj" beforeDir="false" afterPath="$PROJECT_DIR$/Win32/Debug/MainView.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Win32/Debug/Project1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Win32/Debug/Project1.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Win32/Debug/Project1.ilc" beforeDir="false" afterPath="$PROJECT_DIR$/Win32/Debug/Project1.ilc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Win32/Debug/Project1.ild" beforeDir="false" afterPath="$PROJECT_DIR$/Win32/Debug/Project1.ild" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Win32/Debug/Project1.ilf" beforeDir="false" afterPath="$PROJECT_DIR$/Win32/Debug/Project1.ilf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Win32/Debug/Project1.ils" beforeDir="false" afterPath="$PROJECT_DIR$/Win32/Debug/Project1.ils" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Win32/Debug/Project1.map" beforeDir="false" afterPath="$PROJECT_DIR$/Win32/Debug/Project1.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Win32/Debug/Project1.tds" beforeDir="false" afterPath="$PROJECT_DIR$/Win32/Debug/Project1.tds" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Win32/Debug/SettingsView.obj" beforeDir="false" afterPath="$PROJECT_DIR$/Win32/Debug/SettingsView.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Win32/Debug/history" beforeDir="false" afterPath="$PROJECT_DIR$/Win32/Debug/history" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1z2faNB9LfaxONboB5HaiRZNBfp" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="17e49547-e45f-4155-8a13-c1eaf8f97afc" name="Default Changelist" comment="" />
+      <created>1633351166014</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1633351166014</updated>
+      <workItem from="1633351167237" duration="1653000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

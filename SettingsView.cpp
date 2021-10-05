@@ -18,7 +18,7 @@ __fastcall TSettingsForm::TSettingsForm(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TSettingsForm::closeBtnClick(TObject *Sender)
 {
-    SettingsForm->Close();
+	SettingsForm->Close();
 }
 //---------------------------------------------------------------------------
 void __fastcall TSettingsForm::hideBtnClick(TObject *Sender)
@@ -138,4 +138,15 @@ void __fastcall TSettingsForm::showHistoryBtnClick(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TSettingsForm::historyBoxDblClick(TObject *Sender)
+{
+	int size =  WebView->historyManager->getSize();
+	int index = size - historyBox->ItemIndex - 1;
+	std::vector<SiteVisit> history = WebView->historyManager->getHistory();
+	WebView->createNewTab();
+	WebView->getCurrentBrowser()->Navigate(history[index].getUrl().c_str());
+    SettingsForm->Close();
+}
+//----------------------------------- 0 1 2 3
 

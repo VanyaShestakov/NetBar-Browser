@@ -26,12 +26,17 @@
 #include <utility>
 
 
+#include "PageInfoUnit.h"
+#include "BookmarksReader.h"
+#include "BookmarksWriter.h"
+#include "StringConverter.h"
+#include "SettingsView.h"
 #include "BookmarksManager.h"
 #include "HistoryManager.h"
-//---------------------------------------------------------------------------
+
 class TWebView : public TForm
 {
-__published:	// IDE-managed Components
+__published:
 
 	TEdit *addressBar;
 	TTitleBarPanel *TitleBarPanel1;
@@ -163,6 +168,7 @@ public:
 
 	BookmarksManager *bookmarksManager = new BookmarksManager();
 	HistoryManager *historyManager = new HistoryManager();
+    StringConverter *converter = new StringConverter();
 
 };
 //---------------------------------------------------------------------------

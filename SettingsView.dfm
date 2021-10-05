@@ -392,6 +392,7 @@ object SettingsForm: TSettingsForm
     ParentBiDiMode = False
     ParentFont = False
     TabOrder = 4
+    OnDblClick = historyBoxDblClick
   end
   object showHistoryBtn: TBitBtn
     Left = 264
