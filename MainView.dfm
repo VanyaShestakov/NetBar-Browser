@@ -6,7 +6,7 @@ object WebView: TWebView
   Margins.Bottom = 0
   BorderIcons = []
   ClientHeight = 815
-  ClientWidth = 1284
+  ClientWidth = 1192
   Color = clBtnFace
   CustomTitleBar.CaptionAlignment = taCenter
   CustomTitleBar.Control = TitleBarPanel1
@@ -26,6 +26,7 @@ object WebView: TWebView
   CustomTitleBar.ButtonPressedBackgroundColor = 15395562
   CustomTitleBar.ButtonInactiveForegroundColor = 10066329
   CustomTitleBar.ButtonInactiveBackgroundColor = clWhite
+  Constraints.MinWidth = 700
   DoubleBuffered = True
   Font.Charset = RUSSIAN_CHARSET
   Font.Color = clWindowText
@@ -43,12 +44,12 @@ object WebView: TWebView
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   DesignSize = (
-    1284
+    1192
     815)
   PixelsPerInch = 96
   TextHeight = 21
   object bookmarksBox: TComboBox
-    Left = 904
+    Left = 812
     Top = 25
     Width = 380
     Height = 31
@@ -71,15 +72,17 @@ object WebView: TWebView
     TabOrder = 2
     OnContextPopup = bookmarksBoxContextPopup
     OnSelect = bookmarksBoxSelect
+    ExplicitLeft = 904
   end
   object TitleBarPanel1: TTitleBarPanel
     Left = 0
     Top = 0
-    Width = 1284
+    Width = 1192
     Height = 54
     CustomButtons = <>
+    ExplicitWidth = 1284
     DesignSize = (
-      1284
+      1192
       54)
     object backBtn: TImage
       Left = 16
@@ -214,7 +217,7 @@ object WebView: TWebView
       OnMouseUp = homeBtnMouseUp
     end
     object searchBtn: TImage
-      Left = 1023
+      Left = 931
       Top = 15
       Width = 24
       Height = 24
@@ -255,9 +258,10 @@ object WebView: TWebView
       OnClick = searchBtnClick
       OnMouseDown = searchBtnMouseDown
       OnMouseUp = searchBtnMouseUp
+      ExplicitLeft = 1023
     end
     object settingsBtn: TImage
-      Left = 1159
+      Left = 1067
       Top = 15
       Width = 24
       Height = 24
@@ -283,9 +287,10 @@ object WebView: TWebView
       ShowHint = True
       Stretch = True
       OnClick = settingsBtnClick
+      ExplicitLeft = 1159
     end
     object closeBtn: TImage
-      Left = 1255
+      Left = 1163
       Top = 18
       Width = 16
       Height = 16
@@ -313,9 +318,10 @@ object WebView: TWebView
       OnClick = closeBtnClick
       OnMouseDown = closeBtnMouseDown
       OnMouseUp = closeBtnMouseUp
+      ExplicitLeft = 1255
     end
     object expandBtn: TImage
-      Left = 1233
+      Left = 1141
       Top = 18
       Width = 16
       Height = 16
@@ -338,9 +344,10 @@ object WebView: TWebView
         4E44AE426082}
       Stretch = True
       OnClick = expandBtnClick
+      ExplicitLeft = 1233
     end
     object hideBtn: TImage
-      Left = 1211
+      Left = 1119
       Top = 18
       Width = 16
       Height = 16
@@ -364,6 +371,7 @@ object WebView: TWebView
       OnClick = hideBtnClick
       OnMouseDown = hideBtnMouseDown
       OnMouseUp = hideBtnMouseUp
+      ExplicitLeft = 1211
     end
     object newTabBtn: TImage
       Left = 201
@@ -397,7 +405,7 @@ object WebView: TWebView
       OnMouseUp = newTabBtnMouseUp
     end
     object showBookmarksBtn: TImage
-      Left = 1115
+      Left = 1023
       Top = 15
       Width = 24
       Height = 24
@@ -423,9 +431,10 @@ object WebView: TWebView
       ShowHint = True
       Stretch = True
       OnClick = showBookmarksBtnClick
+      ExplicitLeft = 1115
     end
     object addBookmarkBtn: TImage
-      Left = 1071
+      Left = 979
       Top = 15
       Width = 24
       Height = 24
@@ -466,9 +475,10 @@ object WebView: TWebView
       ShowHint = True
       Stretch = True
       OnClick = addBookmarkBtnClick
+      ExplicitLeft = 1071
     end
     object deleteBookmarkBtn: TImage
-      Left = 1071
+      Left = 979
       Top = 15
       Width = 24
       Height = 24
@@ -502,11 +512,12 @@ object WebView: TWebView
       Stretch = True
       Visible = False
       OnClick = deleteBookmarkBtnClick
+      ExplicitLeft = 1071
     end
     object addressBar: TEdit
       Left = 270
       Top = 15
-      Width = 731
+      Width = 639
       Height = 25
       Alignment = taCenter
       Anchors = [akLeft, akTop, akRight]
@@ -522,6 +533,7 @@ object WebView: TWebView
       Text = 'addressBar'
       OnClick = addressBarClick
       OnMouseLeave = addressBarMouseLeave
+      ExplicitWidth = 731
     end
     object activityIndicator: TActivityIndicator
       Left = 240
@@ -533,7 +545,7 @@ object WebView: TWebView
   object PageControl: TPageControl
     Left = 0
     Top = 54
-    Width = 1284
+    Width = 1192
     Height = 761
     Margins.Left = 0
     Margins.Top = 0
@@ -552,6 +564,7 @@ object WebView: TWebView
     TabOrder = 0
     OnChange = PageControlChange
     OnMouseUp = PageControlMouseUp
+    ExplicitWidth = 1284
   end
   object tabsPopup: TPopupMenu
     Left = 24

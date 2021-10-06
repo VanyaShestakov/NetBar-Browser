@@ -306,6 +306,8 @@ void TWebView::createNewTab()
 	TWebBrowser *browser = new TWebBrowser(PageControl);
 	browser->SelectedEngine = TWebBrowser::TSelectedEngine::EdgeOnly;
 	browser->TOleControl::Parent = tab;
+	browser->Width = tab->Width;
+    browser->Height = tab->Height;
 	browser->Align = alClient;
 	browser->Navigate(homepageUrl);
 	tab->Tag = Integer(browser);

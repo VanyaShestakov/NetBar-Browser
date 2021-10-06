@@ -3,8 +3,8 @@ object SettingsForm: TSettingsForm
   Top = 0
   BorderIcons = []
   BorderStyle = bsDialog
-  ClientHeight = 808
-  ClientWidth = 485
+  ClientHeight = 553
+  ClientWidth = 1060
   Color = clBtnHighlight
   CustomTitleBar.Height = 50
   CustomTitleBar.SystemHeight = False
@@ -20,8 +20,8 @@ object SettingsForm: TSettingsForm
   StyleElements = [seFont, seClient]
   OnShow = FormShow
   DesignSize = (
-    485
-    808)
+    1060
+    553)
   PixelsPerInch = 96
   TextHeight = 13
   object settingsTitle: TLabel
@@ -40,7 +40,7 @@ object SettingsForm: TSettingsForm
     ParentFont = False
   end
   object closeBtn: TImage
-    Left = 449
+    Left = 1024
     Top = 0
     Width = 16
     Height = 16
@@ -68,7 +68,7 @@ object SettingsForm: TSettingsForm
     ExplicitLeft = 719
   end
   object hideBtn: TImage
-    Left = 427
+    Left = 1002
     Top = 0
     Width = 16
     Height = 16
@@ -89,10 +89,11 @@ object SettingsForm: TSettingsForm
       454E44AE426082}
     Stretch = True
     OnClick = hideBtnClick
+    ExplicitLeft = 427
   end
   object casheTitle: TLabel
     Left = 27
-    Top = 184
+    Top = 159
     Width = 37
     Height = 25
     Caption = #1050#1101#1096
@@ -107,7 +108,7 @@ object SettingsForm: TSettingsForm
   end
   object casheSizeTitle: TLabel
     Left = 27
-    Top = 215
+    Top = 190
     Width = 59
     Height = 21
     Caption = #1056#1072#1079#1084#1077#1088':'
@@ -122,7 +123,7 @@ object SettingsForm: TSettingsForm
   end
   object casheSizeLabel: TLabel
     Left = 92
-    Top = 215
+    Top = 190
     Width = 4
     Height = 21
     Color = clGray
@@ -136,7 +137,7 @@ object SettingsForm: TSettingsForm
   end
   object browserDataTitle: TLabel
     Left = 27
-    Top = 272
+    Top = 239
     Width = 164
     Height = 25
     Caption = #1044#1072#1085#1085#1099#1077' '#1073#1088#1072#1091#1079#1077#1088#1072
@@ -151,7 +152,7 @@ object SettingsForm: TSettingsForm
   end
   object browserDataSizeTitle: TLabel
     Left = 27
-    Top = 303
+    Top = 270
     Width = 59
     Height = 21
     Caption = #1056#1072#1079#1084#1077#1088':'
@@ -166,7 +167,7 @@ object SettingsForm: TSettingsForm
   end
   object browserDataSizeLabel: TLabel
     Left = 92
-    Top = 303
+    Top = 270
     Width = 4
     Height = 21
     Color = clGray
@@ -180,7 +181,7 @@ object SettingsForm: TSettingsForm
   end
   object browserHistoryTitle: TLabel
     Left = 27
-    Top = 472
+    Top = 392
     Width = 170
     Height = 25
     Caption = #1048#1089#1090#1086#1088#1080#1103' '#1073#1088#1072#1091#1079#1077#1088#1072
@@ -195,7 +196,7 @@ object SettingsForm: TSettingsForm
   end
   object browserHistorySizeTitle: TLabel
     Left = 27
-    Top = 503
+    Top = 423
     Width = 59
     Height = 21
     Caption = #1056#1072#1079#1084#1077#1088':'
@@ -210,42 +211,12 @@ object SettingsForm: TSettingsForm
   end
   object browserHistorySizeLabel: TLabel
     Left = 92
-    Top = 503
-    Width = 4
+    Top = 423
+    Width = 128
     Height = 21
     Color = clGray
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Segoe UI Semibold'
-    Font.Style = [fsBold]
-    ParentColor = False
-    ParentFont = False
-  end
-  object Label1: TLabel
-    Left = 27
-    Top = 56
-    Width = 140
-    Height = 25
-    Caption = 'NetBar Browser'
-    Color = clGray
-    Font.Charset = RUSSIAN_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -19
-    Font.Name = 'Segoe UI'
-    Font.Style = [fsBold]
-    ParentColor = False
-    ParentFont = False
-  end
-  object Label2: TLabel
-    Left = 27
-    Top = 87
-    Width = 130
-    Height = 21
-    Caption = #1042#1077#1088#1089#1080#1103': 1.0 (Beta)'
-    Color = clGray
-    Font.Charset = RUSSIAN_CHARSET
-    Font.Color = clBlack
     Font.Height = -16
     Font.Name = 'Segoe UI Semibold'
     Font.Style = [fsBold]
@@ -254,7 +225,7 @@ object SettingsForm: TSettingsForm
   end
   object bookmarksTitle: TLabel
     Left = 27
-    Top = 368
+    Top = 319
     Width = 88
     Height = 25
     Caption = #1047#1072#1082#1083#1072#1076#1082#1080
@@ -269,7 +240,7 @@ object SettingsForm: TSettingsForm
   end
   object bookmarksAmountTitle: TLabel
     Left = 27
-    Top = 399
+    Top = 350
     Width = 95
     Height = 21
     Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086':'
@@ -284,7 +255,7 @@ object SettingsForm: TSettingsForm
   end
   object Label5: TLabel
     Left = 92
-    Top = 399
+    Top = 350
     Width = 4
     Height = 21
     Color = clGray
@@ -298,7 +269,7 @@ object SettingsForm: TSettingsForm
   end
   object bookmarksAmountLabel: TLabel
     Left = 128
-    Top = 399
+    Top = 350
     Width = 4
     Height = 21
     Color = clGray
@@ -310,10 +281,40 @@ object SettingsForm: TSettingsForm
     ParentColor = False
     ParentFont = False
   end
+  object Label3: TLabel
+    Left = 27
+    Top = 58
+    Width = 193
+    Height = 25
+    Caption = #1044#1086#1084#1072#1096#1085#1103#1103' '#1089#1090#1088#1072#1085#1080#1094#1072
+    Color = clGray
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label1: TLabel
+    Left = 545
+    Top = 58
+    Width = 191
+    Height = 25
+    Caption = #1048#1089#1090#1086#1088#1080#1103' '#1087#1086#1089#1077#1097#1077#1085#1080#1081
+    Color = clGray
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
   object clearCasheBtn: TBitBtn
-    Left = 312
-    Top = 202
-    Width = 153
+    Left = 288
+    Top = 177
+    Width = 177
     Height = 34
     Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1082#1101#1096
     Font.Charset = RUSSIAN_CHARSET
@@ -326,9 +327,9 @@ object SettingsForm: TSettingsForm
     OnClick = clearCasheBtnClick
   end
   object clearBrowserDataBtn: TBitBtn
-    Left = 280
-    Top = 294
-    Width = 185
+    Left = 288
+    Top = 261
+    Width = 177
     Height = 34
     Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1076#1072#1085#1085#1099#1077
     Font.Charset = RUSSIAN_CHARSET
@@ -341,9 +342,9 @@ object SettingsForm: TSettingsForm
     OnClick = clearBrowserDataBtnClick
   end
   object clearBrowserHistoryBtn: TBitBtn
-    Left = 264
-    Top = 766
-    Width = 201
+    Left = 841
+    Top = 56
+    Width = 177
     Height = 34
     Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1080#1089#1090#1086#1088#1080#1102
     Font.Charset = RUSSIAN_CHARSET
@@ -356,9 +357,9 @@ object SettingsForm: TSettingsForm
     OnClick = clearBrowserHistoryBtnClick
   end
   object clearBookmarksBtn: TBitBtn
-    Left = 264
-    Top = 390
-    Width = 201
+    Left = 288
+    Top = 337
+    Width = 177
     Height = 34
     Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1079#1072#1082#1083#1072#1076#1082#1080
     Font.Charset = RUSSIAN_CHARSET
@@ -371,10 +372,10 @@ object SettingsForm: TSettingsForm
     OnClick = clearBookmarksBtnClick
   end
   object historyBox: TListBox
-    Left = 27
-    Top = 570
-    Width = 438
-    Height = 190
+    Left = 545
+    Top = 106
+    Width = 473
+    Height = 410
     Cursor = crHandPoint
     Style = lbOwnerDrawFixed
     BevelInner = bvNone
@@ -394,12 +395,11 @@ object SettingsForm: TSettingsForm
     TabOrder = 4
     OnDblClick = historyBoxDblClick
   end
-  object showHistoryBtn: TBitBtn
-    Left = 264
-    Top = 490
-    Width = 201
-    Height = 34
-    Caption = #1055#1086#1082#1072#1079#1072#1090#1100' '#1080#1089#1090#1086#1088#1080#1102
+  object homepageUrlEdit: TEdit
+    Left = 27
+    Top = 106
+    Width = 438
+    Height = 29
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -407,6 +407,49 @@ object SettingsForm: TSettingsForm
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 5
+  end
+  object BitBtn1: TBitBtn
+    Left = 296
+    Top = 56
+    Width = 169
+    Height = 34
+    Caption = #1048#1079#1084#1077#1085#1080#1090#1100
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 6
+    OnClick = clearBookmarksBtnClick
+  end
+  object showHistoryBtn: TBitBtn
+    Left = 288
+    Top = 410
+    Width = 177
+    Height = 34
+    Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1080#1089#1090#1086#1088#1080#1102
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 7
     OnClick = showHistoryBtnClick
+  end
+  object BitBtn: TBitBtn
+    Left = 27
+    Top = 482
+    Width = 177
+    Height = 34
+    Caption = #1054' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 8
   end
 end

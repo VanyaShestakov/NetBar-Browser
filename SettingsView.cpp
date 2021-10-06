@@ -61,9 +61,10 @@ void __fastcall TSettingsForm::FormShow(TObject *Sender)
 	bookmarksAmountLabel->Caption = IntToStr(WebView->bookmarksManager->getSize());
 	browserHistorySizeLabel->Caption = IntToStr(WebView->historyManager->getSize());
 	updateHistoryBox();
-    isOpenedHistory = false;
-	SettingsForm->Height = DEFAULT_HEIGHT;
-    showHistoryBtn->Caption = "Показать историю";
+	isOpenedHistory = false;
+	homepageUrlEdit->Text = WebView->homepageUrl;
+	SettingsForm->Width = DEFAULT_WIDTH;
+	showHistoryBtn->Caption = "Показать историю";
 }
 
 void __fastcall TSettingsForm::clearCasheBtnClick(TObject *Sender)
@@ -127,13 +128,13 @@ void __fastcall TSettingsForm::showHistoryBtnClick(TObject *Sender)
 	if (isOpenedHistory)
 	{
 		isOpenedHistory = false;
-		SettingsForm->Height = DEFAULT_HEIGHT;
+		SettingsForm->Width = DEFAULT_WIDTH;
 		showHistoryBtn->Caption = "Показать историю";
 	}
 	else
 	{
 		isOpenedHistory = true;
-		SettingsForm->Height = EXTENDED_HEIGHT;
+		SettingsForm->Width = EXTENDED_WIDTH;
 		showHistoryBtn->Caption = "Скрыть историю";
     }
 }
