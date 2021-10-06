@@ -23,6 +23,7 @@ class BookmarksManager
 
 	public:
 		BookmarksManager();
+        ~BookmarksManager();
 		bool addBookmark(std::string title, std::string url);
 		bool contains(std::string url);
 		bool removeBookmark(std::string url);

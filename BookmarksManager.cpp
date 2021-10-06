@@ -13,6 +13,13 @@ BookmarksManager::BookmarksManager()
 	readBookmarks("bookmarks");
 }
 
+BookmarksManager::~BookmarksManager()
+{
+	delete writer;
+	delete reader;
+	std::vector<std::pair<std::string, std::string>>().swap(bookmarks);
+}
+
 void BookmarksManager::readBookmarks(std::string path)
 {
 	bookmarks = reader->readBookmarks(path);

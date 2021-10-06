@@ -26,6 +26,7 @@ class HistoryManager
 
 	public:
 		HistoryManager();
+        ~HistoryManager();
 		bool addSiteVisit(std::string time, std::string title, std::string url);
 		//bool contains(std::string url);
 		//bool removeBookmark(std::string url);

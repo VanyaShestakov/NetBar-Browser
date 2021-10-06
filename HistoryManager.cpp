@@ -13,6 +13,13 @@ HistoryManager::HistoryManager()
 	readHistory("history");
 }
 
+HistoryManager::~HistoryManager()
+{
+	delete writer;
+	delete reader;
+	std::vector<SiteVisit>().swap(history);
+}
+
 void HistoryManager::readHistory(std::string path)
 {
 	history = reader->readHistory(path);

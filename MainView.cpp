@@ -20,7 +20,11 @@ TWebView *WebView;
 __fastcall TWebView::TWebView(TComponent* Owner)
 	: TForm(Owner)
 {
-
+    bookmarksManager = new BookmarksManager();
+	historyManager = new HistoryManager();
+	browserManager = new BrowserManager();
+	converter = new StringConverter();
+	homepageUrl = converter->convertToSystemString(browserManager->getHomepageUrl());
 }
 
 void __fastcall TWebView::FormCreate(TObject *Sender)
@@ -216,7 +220,7 @@ void __fastcall TWebView::searchBtnClick(TObject *Sender)
 }
 void __fastcall TWebView::homeBtnClick(TObject *Sender)
 {
-	getCurrentBrowser()->Navigate(HOMEPAGE_URL);
+	getCurrentBrowser()->Navigate(homepageUrl);
 }
 
 void __fastcall TWebView::addressBarClick(TObject *Sender)
@@ -303,7 +307,7 @@ void TWebView::createNewTab()
 	browser->SelectedEngine = TWebBrowser::TSelectedEngine::EdgeOnly;
 	browser->TOleControl::Parent = tab;
 	browser->Align = alClient;
-	browser->Navigate(HOMEPAGE_URL);
+	browser->Navigate(homepageUrl);
 	tab->Tag = Integer(browser);
 	browser->TOleControl::Name = tab->Name + "_browser";
 

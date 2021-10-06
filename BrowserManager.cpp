@@ -6,6 +6,16 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
+
+BrowserManager::BrowserManager()
+{
+	homepageUrl = readHomePageUrl("homepage");
+	if (homepageUrl.empty())
+	{
+        homepageUrl = DEFAULT_HOMEPAGE_URL;
+	}
+}
+
 int BrowserManager::getFolderSize(AnsiString folder, int &size)
 {
 	TSearchRec searchRec;
@@ -55,6 +65,19 @@ void BrowserManager::clearCashe()
 void BrowserManager::clearBrowserData()
 {
 	std::filesystem::remove_all(BROWSER_DATA_PATH.c_str());
+}
+
+std::string BrowserManager::readHomePageUrl(std::string path)
+{
+	std::ifstream fileReader;
+	std::string url;
+    fileReader.open(path);
+	if (fileReader.is_open())
+	{
+		std::getline(fileReader, url);
+        fileReader.close();
+    }
+	return url;
 }
 
 

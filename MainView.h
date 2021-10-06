@@ -166,9 +166,12 @@ public:
 	void updateBookmarksBox();
 
 
-	BookmarksManager *bookmarksManager = new BookmarksManager();
-	HistoryManager *historyManager = new HistoryManager();
-    StringConverter *converter = new StringConverter();
+	BookmarksManager *bookmarksManager;
+	HistoryManager *historyManager;
+	BrowserManager *browserManager;
+	StringConverter *converter;
+
+    String homepageUrl;
 
 };
 //---------------------------------------------------------------------------
