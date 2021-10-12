@@ -131,8 +131,6 @@ private:
 
     bool isFullScreen = false;
 	bool isLoaded = true;
-	String title = "";
-	String pageURL = "";
 	bool isSelectedBar = false;
 	int tabId = 0;
 	int tabPopupIndex = 0;
@@ -167,6 +165,8 @@ public:
 	void updateBookmarksBox();
 
 
+    String title = "";
+	String pageURL = "";
 	BookmarksManager *bookmarksManager;
 	HistoryManager *historyManager;
 	BrowserManager *browserManager;

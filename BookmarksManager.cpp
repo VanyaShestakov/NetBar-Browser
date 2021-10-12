@@ -57,6 +57,18 @@ bool BookmarksManager::contains(std::string url)
 	return false;
 }
 
+bool BookmarksManager::titleExists(std::string title)
+{
+	for (int i = 0; i < bookmarks.size(); ++i)
+	{
+	   if (bookmarks[i].first == title)
+	   {
+		   return true;
+	   }
+	}
+	return false;
+}
+
 bool BookmarksManager::removeBookmark(std::string url)
 {
 	int index = 0;

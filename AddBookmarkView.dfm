@@ -13,6 +13,7 @@ object AddBookmarkForm: TAddBookmarkForm
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object casheSizeTitle: TLabel
@@ -30,7 +31,7 @@ object AddBookmarkForm: TAddBookmarkForm
     ParentColor = False
     ParentFont = False
   end
-  object homepageUrlEdit: TEdit
+  object titleEdit: TEdit
     Left = 26
     Top = 34
     Width = 327
@@ -42,8 +43,9 @@ object AddBookmarkForm: TAddBookmarkForm
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    OnChange = titleEditChange
   end
-  object changeHomepageBtn: TBitBtn
+  object addBtn: TBitBtn
     Left = 26
     Top = 80
     Width = 151
@@ -56,6 +58,7 @@ object AddBookmarkForm: TAddBookmarkForm
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 1
+    OnClick = addBtnClick
   end
   object cancelBtn: TBitBtn
     Left = 202

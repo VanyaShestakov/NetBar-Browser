@@ -366,7 +366,10 @@ void __fastcall TWebView::showBookmarksBtnClick(TObject *Sender)
 
 void __fastcall TWebView::addBookmarkBtnClick(TObject *Sender)
 {
-	AddBookmarkForm->ShowModal();
+    if (isLoaded)
+	{
+		AddBookmarkForm->ShowModal();
+	}
 /*
 	if (isLoaded)
 	{

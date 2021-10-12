@@ -10,16 +10,26 @@
 #include <Vcl.Buttons.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Imaging.pngimage.hpp>
+
+#include <utility>
+#include <string>
+#include <regex>
+#include "MainView.h"
 //---------------------------------------------------------------------------
 class TAddBookmarkForm : public TForm
 {
 __published:	// IDE-managed Components
-	TEdit *homepageUrlEdit;
-	TBitBtn *changeHomepageBtn;
+	TEdit *titleEdit;
+	TBitBtn *addBtn;
 	TBitBtn *cancelBtn;
 	TLabel *casheSizeTitle;
 	void __fastcall cancelBtnClick(TObject *Sender);
+	void __fastcall addBtnClick(TObject *Sender);
+	void __fastcall FormShow(TObject *Sender);
+	void __fastcall titleEditChange(TObject *Sender);
 private:	// User declarations
+	const wchar_t* BOOKMARKS_FILE_ACCESS_WARNING = L"Файл с закладками повреждён, все изменения сохранены не будут";
+	const wchar_t* MESSAGE_TITLE = L"NetBar";
 public:		// User declarations
 	__fastcall TAddBookmarkForm(TComponent* Owner);
 };

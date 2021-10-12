@@ -26,6 +26,7 @@ class BookmarksManager
         ~BookmarksManager();
 		bool addBookmark(std::string title, std::string url);
 		bool contains(std::string url);
+        bool titleExists(std::string title);
 		bool removeBookmark(std::string url);
         bool clearBookmarks();
 		std::vector<std::pair<std::string, std::string>> getBookmarks();
