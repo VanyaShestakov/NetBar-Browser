@@ -19,12 +19,15 @@ class BrowserManager
 		std::string homepageUrl;
 		int getFolderSize(AnsiString folder, int &size);
 		std::string readHomePageUrl(std::string path);
+		bool writeHomepageUrl(std::string path, std::string newUrl);
 	public:
 		BrowserManager();
 		int getCasheSize();
+		std::string getHomepageUrl();
 		void clearCashe();
 		int getBrowserDataSize();
-        void clearBrowserData();
+		void clearBrowserData();
+        bool setHomepageUrl(std::string newUrl);
 };
 //---------------------------------------------------------------------------
 #endif

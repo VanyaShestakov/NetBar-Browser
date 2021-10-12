@@ -33,6 +33,7 @@
 #include "SettingsView.h"
 #include "BookmarksManager.h"
 #include "HistoryManager.h"
+#include "AddBookmarkView.h"
 
 class TWebView : public TForm
 {
@@ -140,7 +141,7 @@ private:
 	const int TAB_POPUP_OFFSET = 75;
 
 	const String NEW_TAB_CAPTION = "Новая вкладка";
-	const String HOMEPAGE_URL = "https://www.google.com/";
+   //	const String HOMEPAGE_URL = "https://www.google.com/";
 	const String SEARCH_URL = "https://www.google.com/search?q=";
 	const String TAB_SPACE = "         ";
 

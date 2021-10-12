@@ -15,6 +15,7 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 	{
 		Application->Initialize();
 		Application->MainFormOnTaskBar = true;
+		Application->Title = "U";
 		Application->CreateForm(__classid(TWebView), &WebView);
 		Application->CreateForm(__classid(TSettingsForm), &SettingsForm);
 		Application->Run();

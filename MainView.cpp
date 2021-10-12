@@ -366,7 +366,8 @@ void __fastcall TWebView::showBookmarksBtnClick(TObject *Sender)
 
 void __fastcall TWebView::addBookmarkBtnClick(TObject *Sender)
 {
-
+	AddBookmarkForm->ShowModal();
+/*
 	if (isLoaded)
 	{
 		StringConverter *converter = new StringConverter();
@@ -384,7 +385,7 @@ void __fastcall TWebView::addBookmarkBtnClick(TObject *Sender)
 		updateBookmarksBox();
 		addBookmarkBtn->Visible = false;
 		deleteBookmarkBtn->Visible = true;
-	}
+	}  */
 }
 
 void TWebView::updateBookmarksBox()

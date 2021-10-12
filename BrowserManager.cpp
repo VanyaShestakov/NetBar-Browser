@@ -12,7 +12,7 @@ BrowserManager::BrowserManager()
 	homepageUrl = readHomePageUrl("homepage");
 	if (homepageUrl.empty())
 	{
-        homepageUrl = DEFAULT_HOMEPAGE_URL;
+		homepageUrl = DEFAULT_HOMEPAGE_URL;
 	}
 }
 
@@ -51,6 +51,11 @@ int BrowserManager::getCasheSize()
 	return getFolderSize(CASHE_PATH, size);
 }
 
+std::string BrowserManager::getHomepageUrl()
+{
+	return homepageUrl;
+}
+
 int BrowserManager::getBrowserDataSize()
 {
 	int size = 0;
@@ -75,9 +80,28 @@ std::string BrowserManager::readHomePageUrl(std::string path)
 	if (fileReader.is_open())
 	{
 		std::getline(fileReader, url);
-        fileReader.close();
-    }
+		fileReader.close();
+	}
 	return url;
+}
+
+bool BrowserManager::setHomepageUrl(std::string newUrl)
+{
+	homepageUrl = newUrl;
+	return writeHomepageUrl("homepage", newUrl);
+}
+
+bool BrowserManager::writeHomepageUrl(std::string path, std::string newUrl)
+{
+	std::ofstream fileWriter;
+	std::string url;
+	fileWriter.open(path);
+	bool isOpen = fileWriter.is_open();
+	if (isOpen)
+	{
+		fileWriter << newUrl;
+	}
+	return isOpen;
 }
 
 

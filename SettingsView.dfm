@@ -408,7 +408,7 @@ object SettingsForm: TSettingsForm
     ParentFont = False
     TabOrder = 5
   end
-  object BitBtn1: TBitBtn
+  object changeHomepageBtn: TBitBtn
     Left = 296
     Top = 56
     Width = 169
@@ -421,7 +421,7 @@ object SettingsForm: TSettingsForm
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 6
-    OnClick = clearBookmarksBtnClick
+    OnClick = changeHomepageBtnClick
   end
   object showHistoryBtn: TBitBtn
     Left = 288

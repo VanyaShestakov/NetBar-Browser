@@ -151,3 +151,27 @@ void __fastcall TSettingsForm::historyBoxDblClick(TObject *Sender)
 }
 //----------------------------------- 0 1 2 3
 
+void __fastcall TSettingsForm::changeHomepageBtnClick(TObject *Sender)
+{
+	StringConverter *converter = new StringConverter();
+	String url = homepageUrlEdit->Text;
+	bool isOpen = WebView->browserManager->setHomepageUrl(converter->convertToStdString(url));
+	WebView->homepageUrl = url;
+	if (isOpen)
+	{
+		Application
+		->MessageBox(HOMEPAGE_SUCCESS,
+					 MESSAGE_TITLE,
+					 MB_OK | MB_ICONINFORMATION);
+	}
+	else
+	{
+        Application
+		->MessageBox(HOMEPAGE_WARNING,
+					 MESSAGE_TITLE,
+					 MB_OK | MB_ICONINFORMATION);
+    }
+
+}
+//---------------------------------------------------------------------------
+
