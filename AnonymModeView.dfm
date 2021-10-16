@@ -1,10 +1,10 @@
-object Form1: TForm1
+object AnonymModeForm: TAnonymModeForm
   Left = 0
   Top = 0
   BorderIcons = []
   BorderStyle = bsDialog
-  ClientHeight = 459
-  ClientWidth = 478
+  ClientHeight = 528
+  ClientWidth = 352
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,7 +16,7 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 13
   object Image1: TImage
-    Left = 96
+    Left = 48
     Top = 8
     Width = 256
     Height = 256
@@ -204,10 +204,85 @@ object Form1: TForm1
       000891310A00213246012044C6280084C81805801019A300102263140042648C
       0240888CF91785EF196C248210210000000049454E44AE426082}
   end
+  object settingsTitle: TLabel
+    Left = 58
+    Top = 280
+    Width = 235
+    Height = 32
+    Caption = #1040#1085#1086#1085#1080#1084#1085#1099#1081' '#1088#1077#1078#1080#1084
+    Color = clGray
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -24
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object casheSizeTitle: TLabel
+    Left = 58
+    Top = 336
+    Width = 227
+    Height = 21
+    Caption = #1042#1099' '#1072#1082#1090#1080#1074#1080#1088#1086#1074#1072#1083#1080' '#1072#1085#1086#1085#1080#1084#1085#1099#1081
+    Color = clGray
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label1: TLabel
+    Left = 68
+    Top = 363
+    Width = 209
+    Height = 21
+    Caption = #1088#1077#1078#1080#1084'.  '#1058#1077#1087#1077#1088#1100' '#1073#1088#1072#1091#1079#1077#1088' '#1085#1077' '
+    Color = clGray
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 58
+    Top = 390
+    Width = 237
+    Height = 21
+    Caption = #1073#1091#1076#1077#1090' '#1089#1086#1093#1088#1072#1085#1103#1090#1100' '#1074#1072#1096#1091' '#1080#1089#1090#1086#1088#1080#1102
+    Color = clGray
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label3: TLabel
+    Left = 98
+    Top = 417
+    Width = 147
+    Height = 21
+    Caption = #1087#1086#1089#1077#1097#1077#1085#1080#1103' '#1089#1072#1081#1090#1086#1074'.'
+    Color = clGray
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
   object addBtn: TBitBtn
-    Left = 162
-    Top = 389
-    Width = 151
+    Left = 58
+    Top = 461
+    Width = 235
     Height = 34
     Caption = #1055#1086#1085#1103#1090#1085#1086
     Font.Charset = RUSSIAN_CHARSET
@@ -217,5 +292,6 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    OnClick = addBtnClick
   end
 end

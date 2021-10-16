@@ -34,6 +34,7 @@
 #include "BookmarksManager.h"
 #include "HistoryManager.h"
 #include "AddBookmarkView.h"
+#include "AnonymModeView.h"
 
 class TWebView : public TForm
 {
@@ -61,6 +62,9 @@ __published:
 	TImage *deleteBookmarkBtn;
 	TPopupMenu *bookmarksPopup;
 	TMenuItem *N1;
+	TImage *disactivateAnonymModeBtn;
+	TImage *anonymModeIndicatorBtn;
+	TImage *activateAnonymModeBtn;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall backBtnClick(TObject *Sender);
 	void __fastcall forwardBtnClick(TObject *Sender);
@@ -126,12 +130,16 @@ __published:
 	void __fastcall closeChoiceClick(TObject *Sender);
 	void __fastcall FormKeyPress(TObject *Sender, System::WideChar &Key);
 	void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
+	void __fastcall activateAnonymModeBtnClick(TObject *Sender);
+	void __fastcall disactivateAnonymModeBtnClick(TObject *Sender);
+	void __fastcall anonymModeIndicatorBtnClick(TObject *Sender);
 
 private:
 
     bool isFullScreen = false;
 	bool isLoaded = true;
 	bool isSelectedBar = false;
+	bool isAnonymMode = false;
 	int tabId = 0;
 	int tabPopupIndex = 0;
 

@@ -549,6 +549,8 @@ void __fastcall TWebView::activateAnonymModeBtnClick(TObject *Sender)
 {
 	activateAnonymModeBtn->Visible = false;
 	disactivateAnonymModeBtn->Visible = true;
+	anonymModeIndicatorBtn->Visible = true;
+	isAnonymMode = true;
 }
 //---------------------------------------------------------------------------
 
@@ -556,6 +558,14 @@ void __fastcall TWebView::disactivateAnonymModeBtnClick(TObject *Sender)
 {
 	activateAnonymModeBtn->Visible = true;
 	disactivateAnonymModeBtn->Visible = false;
+	anonymModeIndicatorBtn->Visible = false;
+	isAnonymMode = false;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TWebView::anonymModeIndicatorBtnClick(TObject *Sender)
+{
+    AnonymModeForm->ShowModal();
 }
 //---------------------------------------------------------------------------
 

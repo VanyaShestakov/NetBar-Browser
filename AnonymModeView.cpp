@@ -7,10 +7,15 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
-TForm1 *Form1;
+TAnonymModeForm *AnonymModeForm;
 //---------------------------------------------------------------------------
-__fastcall TForm1::TForm1(TComponent* Owner)
+__fastcall TAnonymModeForm::TAnonymModeForm(TComponent* Owner)
 	: TForm(Owner)
 {
+}
+//---------------------------------------------------------------------------
+void __fastcall TAnonymModeForm::addBtnClick(TObject *Sender)
+{
+    AnonymModeForm->Close();
 }
 //---------------------------------------------------------------------------

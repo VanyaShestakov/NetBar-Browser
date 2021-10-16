@@ -11,16 +11,22 @@
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Imaging.pngimage.hpp>
 //---------------------------------------------------------------------------
-class TForm1 : public TForm
+class TAnonymModeForm : public TForm
 {
 __published:	// IDE-managed Components
 	TBitBtn *addBtn;
 	TImage *Image1;
+	TLabel *settingsTitle;
+	TLabel *casheSizeTitle;
+	TLabel *Label1;
+	TLabel *Label2;
+	TLabel *Label3;
+	void __fastcall addBtnClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
-	__fastcall TForm1(TComponent* Owner);
+	__fastcall TAnonymModeForm(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
-extern PACKAGE TForm1 *Form1;
+extern PACKAGE TAnonymModeForm *AnonymModeForm;
 //---------------------------------------------------------------------------
 #endif

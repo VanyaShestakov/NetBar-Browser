@@ -255,9 +255,13 @@ void __fastcall TWebView::DocumentComplete(TObject *ASender, _di_IDispatch const
 	isLoaded = true;
 	activityIndicator->StopAnimation();
 	activityIndicator->Visible = false;
-    time_t now = time(0);
-	std::string stringTime = ctime(&now);
-	historyManager->addSiteVisit(stringTime, converter->convertToStdString(title), converter->convertToStdString(URL));
+	if (!isAnonymMode)
+	{
+        time_t now = time(0);
+		std::string stringTime = ctime(&now);
+		historyManager->addSiteVisit(stringTime, converter->convertToStdString(title), converter->convertToStdString(URL));
+	}
+
 	if (bookmarksManager->contains((converter->convertToStdString(URL))))
 	{
 		deleteBookmarkBtn->Visible = true;
@@ -501,24 +505,67 @@ void __fastcall TWebView::FormKeyDown(TObject *Sender, WORD &Key, TShiftState Sh
 {
 	if (Shift.Contains(ssAlt))
 	{
-		ShowMessage("");
+	   //	ShowMessage("");
 		Key = 0;
 	}
 }
 
-LRESULT WINAPI WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM ) {
-	switch (msg) {
-		case WM_KEYDOWN:
-			switch(LOWORD(wparam)){
-				case 18:
-					ShowMessage("Slovil");
-				break;
-			}
+LRESULT WINAPI WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
+	ShowMessage("");
+	switch (msg)
+    {
+    case WM_SYSKEYDOWN:
+		ShowMessage("");
 		break;
-	default:
-		;
-	}
 
+    case WM_SYSCHAR:
+		ShowMessage("");
+		break;
+
+    case WM_SYSKEYUP:
+		ShowMessage("");
+        break;
+
+    case WM_KEYDOWN:
+		ShowMessage("");
+        break;
+
+    case WM_KEYUP:
+		ShowMessage("");
+		break;
+
+    case WM_CHAR:
+		ShowMessage("");
+        break;
+
+    /* Handle other messages (not shown) */
+
+	}
+	return DefWindowProc(hwnd, msg, wparam, lparam);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TWebView::activateAnonymModeBtnClick(TObject *Sender)
+{
+	activateAnonymModeBtn->Visible = false;
+	disactivateAnonymModeBtn->Visible = true;
+	anonymModeIndicatorBtn->Visible = true;
+	isAnonymMode = true;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TWebView::disactivateAnonymModeBtnClick(TObject *Sender)
+{
+	activateAnonymModeBtn->Visible = true;
+	disactivateAnonymModeBtn->Visible = false;
+	anonymModeIndicatorBtn->Visible = false;
+	isAnonymMode = false;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TWebView::anonymModeIndicatorBtnClick(TObject *Sender)
+{
+    AnonymModeForm->ShowModal();
 }
 //---------------------------------------------------------------------------
 
