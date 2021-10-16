@@ -54,6 +54,8 @@ __published:	// IDE-managed Components
 	void __fastcall showHistoryBtnClick(TObject *Sender);
 	void __fastcall historyBoxDblClick(TObject *Sender);
 	void __fastcall changeHomepageBtnClick(TObject *Sender);
+	void __fastcall historyBoxMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift,
+          int X, int Y);
 private:	// User declarations
 
 	BrowserManager *browserManager = new BrowserManager();

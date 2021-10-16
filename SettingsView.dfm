@@ -212,7 +212,7 @@ object SettingsForm: TSettingsForm
   object browserHistorySizeLabel: TLabel
     Left = 92
     Top = 423
-    Width = 128
+    Width = 4
     Height = 21
     Color = clGray
     Font.Charset = RUSSIAN_CHARSET
@@ -394,6 +394,7 @@ object SettingsForm: TSettingsForm
     ParentFont = False
     TabOrder = 4
     OnDblClick = historyBoxDblClick
+    OnMouseUp = historyBoxMouseUp
   end
   object homepageUrlEdit: TEdit
     Left = 27

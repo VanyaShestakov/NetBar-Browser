@@ -175,3 +175,15 @@ void __fastcall TSettingsForm::changeHomepageBtnClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TSettingsForm::historyBoxMouseUp(TObject *Sender, TMouseButton Button,
+          TShiftState Shift, int X, int Y)
+{
+	if (Button == mbRight)
+	{      /*
+		itemPopupIndex = historyBox->;
+		TPoint point = GetClientOrigin();
+		tabsPopup->Popup(X + point.X, Y + point.Y + TAB_POPUP_OFFSET); */
+	}
+}
+//---------------------------------------------------------------------------
+

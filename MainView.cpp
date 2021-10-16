@@ -505,5 +505,20 @@ void __fastcall TWebView::FormKeyDown(TObject *Sender, WORD &Key, TShiftState Sh
 		Key = 0;
 	}
 }
+
+LRESULT WINAPI WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM ) {
+	switch (msg) {
+		case WM_KEYDOWN:
+			switch(LOWORD(wparam)){
+				case 18:
+					ShowMessage("Slovil");
+				break;
+			}
+		break;
+	default:
+		;
+	}
+
+}
 //---------------------------------------------------------------------------
 
