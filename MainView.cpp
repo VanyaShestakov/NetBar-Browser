@@ -254,7 +254,9 @@ void __fastcall TWebView::DocumentComplete(TObject *ASender, _di_IDispatch const
 		->Caption = TAB_SPACE + title + TAB_SPACE;
 	isLoaded = true;
 	activityIndicator->StopAnimation();
+	updateBtn->Visible = true;
 	activityIndicator->Visible = false;
+   // getCurrentBrowser()->Get_Document()->
 	if (!isAnonymMode)
 	{
         time_t now = time(0);
@@ -322,14 +324,17 @@ void TWebView::createNewTab()
 	browser->OnTitleChange = TitleChange;
 	browser->OnBeforeNavigate2 = BeforeNavigate2;
 
+   //	PageControl->Images->AddImages(ImageList);
 	tabId++;
 }
 
 void __fastcall TWebView::PageControlChange(TObject *Sender)
 {
+
 	title = getCurrentBrowser()->LocationName;
 	pageURL = getCurrentBrowser()->LocationURL;
 	addressBar->Text = title;
+	PageControl->ActivePage->SetFocus();
 	if (bookmarksManager->contains(converter->convertToStdString(pageURL)))
 	{
 		deleteBookmarkBtn->Visible = true;
@@ -345,9 +350,34 @@ void __fastcall TWebView::PageControlChange(TObject *Sender)
 void __fastcall TWebView::PageControlMouseUp(TObject *Sender, TMouseButton Button,
 		  TShiftState Shift, int X, int Y)
 {
+	if (Button == mbLeft)
+	{
+		TRect R = PageControl->TabRect(PageControl->ActivePage->TabIndex);
+		if (PtInRect(Classes::Rect(R.Left, R.Top, R.Left + 20, R.Top + 16),
+			Classes::Point(X, Y)) &&
+			PageControl->PageCount > 1 )
+		{
+			PageControl->Pages[PageControl->IndexOfTabAt(X, Y)]->Free();
+			title = getCurrentBrowser()->LocationName;
+			pageURL = getCurrentBrowser()->LocationURL;
+			addressBar->Text = title;
+			if (bookmarksManager->contains(converter->convertToStdString(pageURL)))
+			{
+				deleteBookmarkBtn->Visible = true;
+				addBookmarkBtn->Visible = false;
+			}
+			else
+			{
+				deleteBookmarkBtn->Visible = false;
+				addBookmarkBtn->Visible = true;
+			}
+		}
+
+	}
+
 	if (Button == mbRight && PageControl->PageCount > 1)
 	{
-		tabPopupIndex = PageControl->IndexOfTabAt(X,Y);
+		tabPopupIndex = PageControl->IndexOfTabAt(X, Y);
 		TPoint point = GetClientOrigin();
 		tabsPopup->Popup(X + point.X, Y + point.Y + TAB_POPUP_OFFSET);
 	}
@@ -415,6 +445,7 @@ void __fastcall TWebView::BeforeNavigate2(TObject *ASender, _di_IDispatch const 
 	isLoaded = false;
 	activityIndicator->StartAnimation();
 	activityIndicator->Visible = true;
+	updateBtn->Visible = false;
 }
 
 void __fastcall TWebView::bookmarksBoxSelect(TObject *Sender)
@@ -481,6 +512,7 @@ void __fastcall TWebView::closeChoiceClick(TObject *Sender)
 		addBookmarkBtn->Visible = true;
 	}
 }
+
 //---------------------------------------------------------------------------
 
 void __fastcall TWebView::FormKeyPress(TObject *Sender, System::WideChar &Key)
@@ -566,6 +598,20 @@ void __fastcall TWebView::disactivateAnonymModeBtnClick(TObject *Sender)
 void __fastcall TWebView::anonymModeIndicatorBtnClick(TObject *Sender)
 {
     AnonymModeForm->ShowModal();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TWebView::PageControlMouseMove(TObject *Sender, TShiftState Shift,
+		  int X, int Y)
+{
+	TRect R = PageControl->TabRect(PageControl->IndexOfTabAt(X, Y));
+	if (PtInRect(Classes::Rect(R.Left, R.Top, R.Left + 20, R.Top + 16), Classes::Point(X, Y))) {
+		PageControl->Cursor = crHandPoint;
+	}
+	else
+	{
+        PageControl->Cursor = crDefault;
+    }
 }
 //---------------------------------------------------------------------------
 

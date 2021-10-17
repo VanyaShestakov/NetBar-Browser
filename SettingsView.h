@@ -43,7 +43,6 @@ __published:	// IDE-managed Components
 	TBitBtn *changeHomepageBtn;
 	TLabel *Label1;
 	TBitBtn *showHistoryBtn;
-	TBitBtn *BitBtn;
 	void __fastcall closeBtnClick(TObject *Sender);
 	void __fastcall hideBtnClick(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);

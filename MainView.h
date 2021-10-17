@@ -22,6 +22,8 @@
 #include <Vcl.Imaging.pngimage.hpp>
 #include <Vcl.Menus.hpp>
 #include <VCLTee.TeCanvas.hpp>
+#include <System.ImageList.hpp>
+#include <Vcl.ImgList.hpp>
 #include <vector>
 #include <utility>
 
@@ -65,6 +67,9 @@ __published:
 	TImage *disactivateAnonymModeBtn;
 	TImage *anonymModeIndicatorBtn;
 	TImage *activateAnonymModeBtn;
+	TImage *aboutProgramBtn;
+	TImageList *ImageList;
+	TImage *Image2;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall backBtnClick(TObject *Sender);
 	void __fastcall forwardBtnClick(TObject *Sender);
@@ -133,6 +138,8 @@ __published:
 	void __fastcall activateAnonymModeBtnClick(TObject *Sender);
 	void __fastcall disactivateAnonymModeBtnClick(TObject *Sender);
 	void __fastcall anonymModeIndicatorBtnClick(TObject *Sender);
+	void __fastcall PageControlMouseMove(TObject *Sender, TShiftState Shift, int X,
+          int Y);
 
 private:
 

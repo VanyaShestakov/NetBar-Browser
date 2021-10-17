@@ -3,7 +3,7 @@ object SettingsForm: TSettingsForm
   Top = 0
   BorderIcons = []
   BorderStyle = bsDialog
-  ClientHeight = 553
+  ClientHeight = 488
   ClientWidth = 1060
   Color = clBtnHighlight
   CustomTitleBar.Height = 50
@@ -21,7 +21,7 @@ object SettingsForm: TSettingsForm
   OnShow = FormShow
   DesignSize = (
     1060
-    553)
+    488)
   PixelsPerInch = 96
   TextHeight = 13
   object settingsTitle: TLabel
@@ -375,7 +375,7 @@ object SettingsForm: TSettingsForm
     Left = 545
     Top = 106
     Width = 473
-    Height = 410
+    Height = 338
     Cursor = crHandPoint
     Style = lbOwnerDrawFixed
     BevelInner = bvNone
@@ -438,19 +438,5 @@ object SettingsForm: TSettingsForm
     ParentFont = False
     TabOrder = 7
     OnClick = showHistoryBtnClick
-  end
-  object BitBtn: TBitBtn
-    Left = 27
-    Top = 482
-    Width = 177
-    Height = 34
-    Caption = #1054' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
-    Font.Charset = RUSSIAN_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Segoe UI Semibold'
-    Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 8
   end
 end

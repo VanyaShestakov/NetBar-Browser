@@ -6,8 +6,10 @@
 //---------------------------------------------------------------------------
 #include <Vcl.Styles.hpp>
 #include <Vcl.Themes.hpp>
-USEFORM("SettingsView.cpp", SettingsForm);
 USEFORM("MainView.cpp", WebView);
+USEFORM("SettingsView.cpp", SettingsForm);
+USEFORM("AddBookmarkView.cpp", AddBookmarkForm);
+USEFORM("AnonymModeView.cpp", AnonymModeForm);
 //---------------------------------------------------------------------------
 int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
@@ -18,6 +20,8 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 		Application->Title = "U";
 		Application->CreateForm(__classid(TWebView), &WebView);
 		Application->CreateForm(__classid(TSettingsForm), &SettingsForm);
+		Application->CreateForm(__classid(TAddBookmarkForm), &AddBookmarkForm);
+		Application->CreateForm(__classid(TAnonymModeForm), &AnonymModeForm);
 		Application->Run();
 	}
 	catch (Exception &exception)
