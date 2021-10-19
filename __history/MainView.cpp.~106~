@@ -246,40 +246,48 @@ void __fastcall TWebView::WebBrowserTitleChange(TObject *ASender, const WideStri
 	addressBar->Text = title;
 }
 
+void __fastcall TWebView::TitleChange(TObject *ASender, const WideString Text)
+{
+	title = Text;
+	if (PageControl->ActivePageIndex == loadingTab)
+	{
+		addressBar->Text = title;
+	}
+	PageControl->Pages[loadingTab]->Caption = TAB_SPACE + title + TAB_SPACE;
+}
+
 void __fastcall TWebView::DocumentComplete(TObject *ASender, _di_IDispatch const pDisp, const OleVariant &URL)
 {
 	pageURL = URL;
-	PageControl
-		->ActivePage
-		->Caption = TAB_SPACE + title + TAB_SPACE;
 	isLoaded = true;
 	activityIndicator->StopAnimation();
 	updateBtn->Visible = true;
 	activityIndicator->Visible = false;
-   // getCurrentBrowser()->Get_Document()->
 	if (!isAnonymMode)
 	{
-		time_t now = time(0);
-		std::string stringTime = ctime(&now);
-		historyManager->addSiteVisit(stringTime, converter->convertToStdString(title), converter->convertToStdString(URL));
+		registerSiteVisit(converter->convertToStdString(title), converter->convertToStdString(URL));
 	}
-
 	if (bookmarksManager->contains((converter->convertToStdString(URL))))
 	{
-		deleteBookmarkBtn->Visible = true;
-		addBookmarkBtn->Visible = false;
+		setAddBookmarkBtnVisible(false);
 	}
 	else
 	{
-		deleteBookmarkBtn->Visible = false;
-		addBookmarkBtn->Visible = true;
+		setAddBookmarkBtnVisible(true);
 	}
 }
 
-void registerSiteVisit(std::string title, std::string url) {
-    time_t now = time(0);
+void TWebView::registerSiteVisit(std::string title, std::string url)
+{
+	time_t now = time(0);
 	std::string stringTime = ctime(&now);
 	historyManager->addSiteVisit(stringTime, title, url);
+}
+
+void TWebView::setAddBookmarkBtnVisible(bool isVisible)
+{
+	deleteBookmarkBtn->Visible = !isVisible;
+	addBookmarkBtn->Visible = isVisible;
 }
 
 void __fastcall TWebView::NewWindow3(TObject *ASender, _di_IDispatch &ppDisp, WordBool &Cancel,
@@ -288,12 +296,6 @@ void __fastcall TWebView::NewWindow3(TObject *ASender, _di_IDispatch &ppDisp, Wo
 	createNewTab();
 	getCurrentBrowser()->Navigate(bstrUrl);
 	Cancel = true;
-}
-
-void __fastcall TWebView::TitleChange(TObject *ASender, const WideString Text)
-{
-	title = Text;
-	addressBar->Text = title;
 }
 
 //TABS//////////////////////////////////////////////////////////////////////////
@@ -330,7 +332,6 @@ void TWebView::createNewTab()
 	browser->OnTitleChange = TitleChange;
 	browser->OnBeforeNavigate2 = BeforeNavigate2;
 
-   //	PageControl->Images->AddImages(ImageList);
 	tabId++;
 }
 
@@ -340,16 +341,13 @@ void __fastcall TWebView::PageControlChange(TObject *Sender)
 	title = getCurrentBrowser()->LocationName;
 	pageURL = getCurrentBrowser()->LocationURL;
 	addressBar->Text = title;
-	PageControl->ActivePage->SetFocus();
 	if (bookmarksManager->contains(converter->convertToStdString(pageURL)))
 	{
-		deleteBookmarkBtn->Visible = true;
-		addBookmarkBtn->Visible = false;
+		setAddBookmarkBtnVisible(false);
 	}
 	else
 	{
-		deleteBookmarkBtn->Visible = false;
-		addBookmarkBtn->Visible = true;
+		setAddBookmarkBtnVisible(true);
 	}
 }
 
@@ -452,6 +450,7 @@ void __fastcall TWebView::BeforeNavigate2(TObject *ASender, _di_IDispatch const 
 		  const OleVariant &PostData, const OleVariant &Headers,
 		  WordBool &Cancel)
 {
+	loadingTab = PageControl->ActivePageIndex;
 	isLoaded = false;
 	activityIndicator->StartAnimation();
 	activityIndicator->Visible = true;

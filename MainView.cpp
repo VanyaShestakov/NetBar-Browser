@@ -364,7 +364,10 @@ void __fastcall TWebView::PageControlMouseUp(TObject *Sender, TMouseButton Butto
 			int index = PageControl->IndexOfTabAt(X, Y);
 			int activePageIndex = PageControl->ActivePageIndex;
 			PageControl->Pages[index]->Free();
-			//PageControl->ActivePageIndex = activePageIndex == index ? index - 1 :
+			isLoaded = true;
+			activityIndicator->StopAnimation();
+			updateBtn->Visible = true;
+            activityIndicator->Visible = false;
 			PageControl->ActivePageIndex = index - 1;
 			title = getCurrentBrowser()->LocationName;
 			pageURL = getCurrentBrowser()->LocationURL;
