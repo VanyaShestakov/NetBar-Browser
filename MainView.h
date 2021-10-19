@@ -37,6 +37,7 @@
 #include "HistoryManager.h"
 #include "AddBookmarkView.h"
 #include "AnonymModeView.h"
+#include "AboutProgramView.h"
 
 class TWebView : public TForm
 {
@@ -140,6 +141,7 @@ __published:
 	void __fastcall anonymModeIndicatorBtnClick(TObject *Sender);
 	void __fastcall PageControlMouseMove(TObject *Sender, TShiftState Shift, int X,
           int Y);
+	void __fastcall aboutProgramBtnClick(TObject *Sender);
 
 private:
 

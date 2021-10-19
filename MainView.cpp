@@ -357,6 +357,7 @@ void __fastcall TWebView::PageControlMouseUp(TObject *Sender, TMouseButton Butto
 			Classes::Point(X, Y)) &&
 			PageControl->PageCount > 1 )
 		{
+			PageControl->TabIndex = PageControl->IndexOfTabAt(X, Y) - 1;
 			PageControl->Pages[PageControl->IndexOfTabAt(X, Y)]->Free();
 			title = getCurrentBrowser()->LocationName;
 			pageURL = getCurrentBrowser()->LocationURL;
@@ -612,6 +613,12 @@ void __fastcall TWebView::PageControlMouseMove(TObject *Sender, TShiftState Shif
 	{
         PageControl->Cursor = crDefault;
     }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TWebView::aboutProgramBtnClick(TObject *Sender)
+{
+    AboutProgramForm->ShowModal();
 }
 //---------------------------------------------------------------------------
 

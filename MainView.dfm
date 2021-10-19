@@ -549,7 +549,6 @@ object WebView: TWebView
       Height = 24
       Cursor = crHandPoint
       Hint = #1040#1085#1086#1085#1080#1084#1085#1099#1081' '#1088#1077#1078#1080#1084
-      Anchors = [akTop, akRight]
       AutoSize = True
       ParentShowHint = False
       Picture.Data = {
@@ -646,9 +645,7 @@ object WebView: TWebView
         00000049454E44AE426082}
       ShowHint = True
       Stretch = True
-      OnClick = searchBtnClick
-      OnMouseDown = searchBtnMouseDown
-      OnMouseUp = searchBtnMouseUp
+      OnClick = aboutProgramBtnClick
     end
     object addressBar: TEdit
       Left = 320
@@ -694,7 +691,6 @@ object WebView: TWebView
     Font.Name = 'Segoe UI Semibold'
     Font.Style = [fsBold]
     Images = ImageList
-    MultiLine = True
     ParentFont = False
     TabHeight = 25
     TabOrder = 0
@@ -719,8 +715,8 @@ object WebView: TWebView
   end
   object ImageList: TImageList
     BlendColor = clWhite
-    Left = 560
-    Top = 256
+    Left = 168
+    Top = 64
     Bitmap = {
       494C010101000800040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
