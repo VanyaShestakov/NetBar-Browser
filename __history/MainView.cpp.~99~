@@ -259,7 +259,7 @@ void __fastcall TWebView::DocumentComplete(TObject *ASender, _di_IDispatch const
    // getCurrentBrowser()->Get_Document()->
 	if (!isAnonymMode)
 	{
-        time_t now = time(0);
+		time_t now = time(0);
 		std::string stringTime = ctime(&now);
 		historyManager->addSiteVisit(stringTime, converter->convertToStdString(title), converter->convertToStdString(URL));
 	}
@@ -274,6 +274,12 @@ void __fastcall TWebView::DocumentComplete(TObject *ASender, _di_IDispatch const
 		deleteBookmarkBtn->Visible = false;
 		addBookmarkBtn->Visible = true;
 	}
+}
+
+void registerSiteVisit(std::string title, std::string url) {
+    time_t now = time(0);
+	std::string stringTime = ctime(&now);
+	historyManager->addSiteVisit(stringTime, title, url);
 }
 
 void __fastcall TWebView::NewWindow3(TObject *ASender, _di_IDispatch &ppDisp, WordBool &Cancel,
@@ -353,9 +359,15 @@ void __fastcall TWebView::PageControlMouseUp(TObject *Sender, TMouseButton Butto
 	if (Button == mbLeft)
 	{
 		TRect R = PageControl->TabRect(PageControl->ActivePage->TabIndex);
-		if (PtInRect(Classes::Rect(R.Left, R.Top, R.Left + 20, R.Top + 16), Classes::Point(X, Y))  )
+		if (PtInRect(Classes::Rect(R.Left, R.Top, R.Left + 20, R.Top + 16),
+			Classes::Point(X, Y)) &&
+			PageControl->PageCount > 1)
 		{
-			PageControl->Pages[PageControl->IndexOfTabAt(X, Y)]->Free();
+			int index = PageControl->IndexOfTabAt(X, Y);
+			int activePageIndex = PageControl->ActivePageIndex;
+			PageControl->Pages[index]->Free();
+			//PageControl->ActivePageIndex = activePageIndex == index ? index - 1 :
+			PageControl->ActivePageIndex = index - 1;
 			title = getCurrentBrowser()->LocationName;
 			pageURL = getCurrentBrowser()->LocationURL;
 			addressBar->Text = title;
@@ -596,6 +608,26 @@ void __fastcall TWebView::disactivateAnonymModeBtnClick(TObject *Sender)
 void __fastcall TWebView::anonymModeIndicatorBtnClick(TObject *Sender)
 {
     AnonymModeForm->ShowModal();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TWebView::PageControlMouseMove(TObject *Sender, TShiftState Shift,
+		  int X, int Y)
+{
+	TRect R = PageControl->TabRect(PageControl->IndexOfTabAt(X, Y));
+	if (PtInRect(Classes::Rect(R.Left, R.Top, R.Left + 20, R.Top + 16), Classes::Point(X, Y))) {
+		PageControl->Cursor = crHandPoint;
+	}
+	else
+	{
+        PageControl->Cursor = crDefault;
+    }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TWebView::aboutProgramBtnClick(TObject *Sender)
+{
+    AboutProgramForm->ShowModal();
 }
 //---------------------------------------------------------------------------
 

@@ -151,6 +151,7 @@ private:
 	bool isAnonymMode = false;
 	int tabId = 0;
 	int tabPopupIndex = 0;
+    int loadingTab = 0;
 
 	const int ANIMATION_OFFSET = 3;
 	const int TAB_POPUP_OFFSET = 75;
@@ -180,7 +181,8 @@ public:
 		  const OleVariant &PostData, const OleVariant &Headers,
 		  WordBool &Cancel);
 	void updateBookmarksBox();
-
+    void registerSiteVisit(std::string title, std::string url);
+    void setAddBookmarkBtnVisible(bool isVisible);
 
     String title = "";
 	String pageURL = "";

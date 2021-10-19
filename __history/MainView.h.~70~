@@ -22,6 +22,8 @@
 #include <Vcl.Imaging.pngimage.hpp>
 #include <Vcl.Menus.hpp>
 #include <VCLTee.TeCanvas.hpp>
+#include <System.ImageList.hpp>
+#include <Vcl.ImgList.hpp>
 #include <vector>
 #include <utility>
 
@@ -35,6 +37,7 @@
 #include "HistoryManager.h"
 #include "AddBookmarkView.h"
 #include "AnonymModeView.h"
+#include "AboutProgramView.h"
 
 class TWebView : public TForm
 {
@@ -65,6 +68,9 @@ __published:
 	TImage *disactivateAnonymModeBtn;
 	TImage *anonymModeIndicatorBtn;
 	TImage *activateAnonymModeBtn;
+	TImage *aboutProgramBtn;
+	TImageList *ImageList;
+	TImage *Image2;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall backBtnClick(TObject *Sender);
 	void __fastcall forwardBtnClick(TObject *Sender);
@@ -133,6 +139,9 @@ __published:
 	void __fastcall activateAnonymModeBtnClick(TObject *Sender);
 	void __fastcall disactivateAnonymModeBtnClick(TObject *Sender);
 	void __fastcall anonymModeIndicatorBtnClick(TObject *Sender);
+	void __fastcall PageControlMouseMove(TObject *Sender, TShiftState Shift, int X,
+          int Y);
+	void __fastcall aboutProgramBtnClick(TObject *Sender);
 
 private:
 
@@ -171,7 +180,8 @@ public:
 		  const OleVariant &PostData, const OleVariant &Headers,
 		  WordBool &Cancel);
 	void updateBookmarksBox();
-
+    void registerSiteVisit(std::string title, std::string url);
+    void setAddBookmarkBtnVisible(bool isVisible);
 
     String title = "";
 	String pageURL = "";

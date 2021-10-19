@@ -256,24 +256,31 @@ void __fastcall TWebView::DocumentComplete(TObject *ASender, _di_IDispatch const
 	activityIndicator->StopAnimation();
 	updateBtn->Visible = true;
 	activityIndicator->Visible = false;
-   // getCurrentBrowser()->Get_Document()->
 	if (!isAnonymMode)
 	{
-        time_t now = time(0);
-		std::string stringTime = ctime(&now);
-		historyManager->addSiteVisit(stringTime, converter->convertToStdString(title), converter->convertToStdString(URL));
+		registerSiteVisit(converter->convertToStdString(title), converter->convertToStdString(URL));
 	}
-
 	if (bookmarksManager->contains((converter->convertToStdString(URL))))
 	{
-		deleteBookmarkBtn->Visible = true;
-		addBookmarkBtn->Visible = false;
+		setAddBookmarkBtnVisible(false);
 	}
 	else
 	{
-		deleteBookmarkBtn->Visible = false;
-		addBookmarkBtn->Visible = true;
+		setAddBookmarkBtnVisible(true);
 	}
+}
+
+void TWebView::registerSiteVisit(std::string title, std::string url)
+{
+	time_t now = time(0);
+	std::string stringTime = ctime(&now);
+	historyManager->addSiteVisit(stringTime, title, url);
+}
+
+void TWebView::setAddBookmarkBtnVisible(bool isVisible)
+{
+	deleteBookmarkBtn->Visible = !isVisible;
+	addBookmarkBtn->Visible = isVisible;
 }
 
 void __fastcall TWebView::NewWindow3(TObject *ASender, _di_IDispatch &ppDisp, WordBool &Cancel,
@@ -324,7 +331,6 @@ void TWebView::createNewTab()
 	browser->OnTitleChange = TitleChange;
 	browser->OnBeforeNavigate2 = BeforeNavigate2;
 
-   //	PageControl->Images->AddImages(ImageList);
 	tabId++;
 }
 
@@ -337,13 +343,11 @@ void __fastcall TWebView::PageControlChange(TObject *Sender)
 	PageControl->ActivePage->SetFocus();
 	if (bookmarksManager->contains(converter->convertToStdString(pageURL)))
 	{
-		deleteBookmarkBtn->Visible = true;
-		addBookmarkBtn->Visible = false;
+		setAddBookmarkBtnVisible(false);
 	}
 	else
 	{
-		deleteBookmarkBtn->Visible = false;
-		addBookmarkBtn->Visible = true;
+		setAddBookmarkBtnVisible(true);
 	}
 }
 
@@ -353,10 +357,28 @@ void __fastcall TWebView::PageControlMouseUp(TObject *Sender, TMouseButton Butto
 	if (Button == mbLeft)
 	{
 		TRect R = PageControl->TabRect(PageControl->ActivePage->TabIndex);
-		if (PtInRect(Classes::Rect(R.Left, R.Top, R.Left + 16, R.Top + 16), Classes::Point(X, Y))  )
+		if (PtInRect(Classes::Rect(R.Left, R.Top, R.Left + 20, R.Top + 16),
+			Classes::Point(X, Y)) &&
+			PageControl->PageCount > 1)
 		{
-				 //PageControl->Pages[PageControl->ActivePage->TabIndex]->Free();
-				 ShowMessage("Yes");
+			int index = PageControl->IndexOfTabAt(X, Y);
+			int activePageIndex = PageControl->ActivePageIndex;
+			PageControl->Pages[index]->Free();
+			//PageControl->ActivePageIndex = activePageIndex == index ? index - 1 :
+			PageControl->ActivePageIndex = index - 1;
+			title = getCurrentBrowser()->LocationName;
+			pageURL = getCurrentBrowser()->LocationURL;
+			addressBar->Text = title;
+			if (bookmarksManager->contains(converter->convertToStdString(pageURL)))
+			{
+				deleteBookmarkBtn->Visible = true;
+				addBookmarkBtn->Visible = false;
+			}
+			else
+			{
+				deleteBookmarkBtn->Visible = false;
+				addBookmarkBtn->Visible = true;
+			}
 		}
 
 	}
@@ -498,6 +520,7 @@ void __fastcall TWebView::closeChoiceClick(TObject *Sender)
 		addBookmarkBtn->Visible = true;
 	}
 }
+
 //---------------------------------------------------------------------------
 
 void __fastcall TWebView::FormKeyPress(TObject *Sender, System::WideChar &Key)
@@ -583,6 +606,26 @@ void __fastcall TWebView::disactivateAnonymModeBtnClick(TObject *Sender)
 void __fastcall TWebView::anonymModeIndicatorBtnClick(TObject *Sender)
 {
     AnonymModeForm->ShowModal();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TWebView::PageControlMouseMove(TObject *Sender, TShiftState Shift,
+		  int X, int Y)
+{
+	TRect R = PageControl->TabRect(PageControl->IndexOfTabAt(X, Y));
+	if (PtInRect(Classes::Rect(R.Left, R.Top, R.Left + 20, R.Top + 16), Classes::Point(X, Y))) {
+		PageControl->Cursor = crHandPoint;
+	}
+	else
+	{
+        PageControl->Cursor = crDefault;
+    }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TWebView::aboutProgramBtnClick(TObject *Sender)
+{
+    AboutProgramForm->ShowModal();
 }
 //---------------------------------------------------------------------------
 

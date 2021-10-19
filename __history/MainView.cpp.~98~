@@ -355,13 +355,10 @@ void __fastcall TWebView::PageControlMouseUp(TObject *Sender, TMouseButton Butto
 		TRect R = PageControl->TabRect(PageControl->ActivePage->TabIndex);
 		if (PtInRect(Classes::Rect(R.Left, R.Top, R.Left + 20, R.Top + 16),
 			Classes::Point(X, Y)) &&
-			PageControl->PageCount > 1)
+			PageControl->PageCount > 1 )
 		{
-			int index = PageControl->IndexOfTabAt(X, Y);
-			int activePageIndex = PageControl->ActivePageIndex;
-			PageControl->Pages[index]->Free();
-			//PageControl->ActivePageIndex = activePageIndex == index ? index - 1 :
-			PageControl->ActivePageIndex = index - 1;
+			PageControl->TabIndex = PageControl->IndexOfTabAt(X, Y) - 1;
+			PageControl->Pages[PageControl->IndexOfTabAt(X, Y)]->Free();
 			title = getCurrentBrowser()->LocationName;
 			pageURL = getCurrentBrowser()->LocationURL;
 			addressBar->Text = title;
